@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-    class DetalhesPedido
+    public class DetalhesPedido
     {
         public int Id { get; set; }
         public string  TipoPedido { get; set; }

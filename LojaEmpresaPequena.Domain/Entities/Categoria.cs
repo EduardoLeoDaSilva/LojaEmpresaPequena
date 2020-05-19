@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-    class Categoria
+   public class Categoria
     {
         public int Id { get; set; }
         public string Nome { get; set; }
