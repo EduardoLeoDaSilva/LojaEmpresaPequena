@@ -14,7 +14,9 @@ namespace LojaEmpresaPequena.Domain.Entities
         public string Cep { get; set; }
         public string Complemento { get; set; }
 
-        public Endereco(global::System.Int32 id, global::System.String rua, global::System.String bairro, global::System.String cidade, global::System.String estado, global::System.String cep, global::System.String complemento)
+        public Usuario usuario { get; set; }
+
+        public Endereco(global::System.Int32 id, global::System.String rua, global::System.String bairro, global::System.String cidade, global::System.String estado, global::System.String cep, global::System.String complemento, Usuario usuario)
         {
             Id = id;
             Rua = rua;
@@ -23,11 +25,13 @@ namespace LojaEmpresaPequena.Domain.Entities
             Estado = estado;
             Cep = cep;
             Complemento = complemento;
+            this.usuario = usuario;
         }
 
         public Endereco()
         {
         }
+      
     }
 
 }

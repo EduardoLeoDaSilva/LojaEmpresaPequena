@@ -8,11 +8,13 @@ namespace LojaEmpresaPequena.Domain.Entities
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public List<Produto> produtos { get; set; }
 
-        public Categoria(global::System.Int32 id, global::System.String nome)
+        public Categoria(global::System.Int32 id, global::System.String nome, List<Produto> produtos)
         {
             Id = id;
             Nome = nome;
+            this.produtos = produtos;
         }
 
         public Categoria()
