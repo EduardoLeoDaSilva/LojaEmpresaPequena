@@ -13,8 +13,8 @@ namespace LojaEmpresaPequena.Domain.Entities
         public string Role { get; set; }
 
         
-        public List<Endereco> enderecos { get; set; }
-        public List<Pedido> pedidos { get; set; }
+        public List<Endereco> Enderecos { get; set; }
+        public List<Pedido> Pedidos { get; set; }
 
         public Usuario(global::System.Int32 id, global::System.String nome, global::System.String cpf, global::System.String email, global::System.String role, List<Endereco> enderecos, List<Pedido> pedidos)
         {
@@ -23,8 +23,8 @@ namespace LojaEmpresaPequena.Domain.Entities
             Cpf = cpf;
             Email = email;
             Role = role;
-            this.enderecos = enderecos;
-            this.pedidos = pedidos;
+            Enderecos = enderecos;
+            Pedidos = pedidos;
         }
 
         public Usuario()

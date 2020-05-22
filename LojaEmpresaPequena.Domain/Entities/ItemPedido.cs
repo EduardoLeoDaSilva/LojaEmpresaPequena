@@ -9,16 +9,16 @@ namespace LojaEmpresaPequena.Domain.Entities
         public int Id { get; set; }
         public int Quantidade { get; set; }
         public  double Preco { get; set; }
-        public Pedido pedidos { get; set; }
-        public Produto produtos { get; set; }
+        public Pedido Pedido { get; set; }
+        public Produto Produto { get; set; }
 
-        public ItemPedido(global::System.Int32 id, global::System.Int32 quantidade, global::System.Double preco, Pedido pedidos, Produto produtos)
+        public ItemPedido(global::System.Int32 id, global::System.Int32 quantidade, global::System.Double preco, Pedido pedido, Produto produto)
         {
             Id = id;
             Quantidade = quantidade;
             Preco = preco;
-            this.pedidos = pedidos;
-            this.produtos = produtos;
+            Pedido = pedido;
+            Produto = produto;
         }
 
         public ItemPedido()
