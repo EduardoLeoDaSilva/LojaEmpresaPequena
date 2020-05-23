@@ -1,16 +1,16 @@
-﻿using System;
+﻿using LojaEmpresaPequena.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-    public class Pedido
+    public class Pedido : BaseEntity
     {
-        public int Id { get; set; }
         public string DataPedido { get; set; }
         public string DataEnvio { get; set; }
-        public string StatusPedido { get; set; }
-
+        public StatusPedido StatusPedido { get; set; }
+        public StatusEnvio StatusEnvio { get; set; }
 
         public List<Usuario> Usuarios { get; set; }
 
@@ -18,20 +18,21 @@ namespace LojaEmpresaPequena.Domain.Entities
 
         public DetalhesPedido DetalhesPedido{ get; set; }
 
-        public Pedido(global::System.Int32 id, global::System.String dataPedido, global::System.String dataEnvio, global::System.String statusPedido, List<Usuario> usuarios, List<ItemPedido> itemPedidos, DetalhesPedido detalhesPedido)
+        public Pedido(string dataPedido, string dataEnvio, StatusPedido statusPedido, StatusEnvio statusEnvio, List<Usuario> usuarios, List<ItemPedido> itemPedidos, DetalhesPedido detalhesPedido)
         {
-            Id = id;
             DataPedido = dataPedido;
             DataEnvio = dataEnvio;
             StatusPedido = statusPedido;
+            StatusEnvio = statusEnvio;
             Usuarios = usuarios;
             ItemPedidos = itemPedidos;
             DetalhesPedido = detalhesPedido;
         }
 
         public Pedido()
-{
-}
+        {
+
+        }
     }
 
 }

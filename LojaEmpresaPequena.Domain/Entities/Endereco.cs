@@ -4,9 +4,8 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-    public class Endereco
+    public class Endereco : BaseEntity
     {
-        public int Id { get; set; }
         public string Rua { get; set; }
         public string Bairro { get; set; }
         public  string Cidade  { get; set; }
@@ -16,9 +15,8 @@ namespace LojaEmpresaPequena.Domain.Entities
 
         public Usuario Usuario { get; set; }
 
-        public Endereco(global::System.Int32 id, global::System.String rua, global::System.String bairro, global::System.String cidade, global::System.String estado, global::System.String cep, global::System.String complemento, Usuario usuario)
+        public Endereco(string rua, string bairro, string cidade, string estado, string cep, string complemento, Usuario usuario)
         {
-            Id = id;
             Rua = rua;
             Bairro = bairro;
             Cidade = cidade;

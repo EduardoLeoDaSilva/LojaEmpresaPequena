@@ -1,27 +1,23 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-   public class Usuario
+   public class Usuario : IdentityUser
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
-        public string Email { get; set; }
         public string Role { get; set; }
-
-        
+ 
         public List<Endereco> Enderecos { get; set; }
         public List<Pedido> Pedidos { get; set; }
 
-        public Usuario(global::System.Int32 id, global::System.String nome, global::System.String cpf, global::System.String email, global::System.String role, List<Endereco> enderecos, List<Pedido> pedidos)
+        public Usuario(string nome, string cpf, string role, List<Endereco> enderecos, List<Pedido> pedidos)
         {
-            Id = id;
             Nome = nome;
             Cpf = cpf;
-            Email = email;
             Role = role;
             Enderecos = enderecos;
             Pedidos = pedidos;
