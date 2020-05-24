@@ -11,7 +11,10 @@ namespace LojaEmpresaPequena.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<Pedido> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.HasMany(x => x.ItemPedidos).WithOne(x => x.Pedido);
+            builder.HasOne(x => x.Usuario).WithMany(x => x.Pedidos);
+            builder.HasOne(x => x.DetalhesPedido).WithOne(x => x.Pedido).HasForeignKey<DetalhesPedido>(x => x.Id);
         }
     }
 }

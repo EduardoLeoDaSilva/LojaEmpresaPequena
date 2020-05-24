@@ -11,7 +11,7 @@ namespace LojaEmpresaPequena.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
         }
     }
 }

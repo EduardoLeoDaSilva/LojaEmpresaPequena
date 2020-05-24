@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using LojaEmpresaPequena.Context;
 
+
 namespace LojaEmpresaPequena.Services
 {
     public class Startup
@@ -28,11 +29,41 @@ namespace LojaEmpresaPequena.Services
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            
-            services.AddDbContext<LojaEmpresaPequenaContext>(options => options.UseSqlServer("Data Source=DESKTOP-EPORE66;Initial Catalog=lojaPequena;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", b => b.MigrationsAssembly("LojaEmpresaPequena.Services")) );
+        { 
+           services.AddDbContext<LojaEmpresaPequenaIdentity>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
+            services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentity>();
 
-            services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(0);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = false;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+            });
+
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    // Cookie settings
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+            //    options.LoginPath = "/Identity/Account/Login";
+            //    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            //    options.SlidingExpiration = true;
+            //});
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }

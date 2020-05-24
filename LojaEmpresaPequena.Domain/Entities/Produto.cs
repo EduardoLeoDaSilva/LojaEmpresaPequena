@@ -10,17 +10,15 @@ namespace LojaEmpresaPequena.Domain.Entities
         public string Marca { get; set; }
         public  double Preco { get; set; }
         public int QuantidadeEstoque { get; set; }
-        public ItemPedido ItemPedido { get; set; }
-        public List<Categoria> Categorias { get; set; }
+        public List<ProdutoCategoria> ProdutoCategorias { get; set; }
 
-        public Produto(string nome, string marca, double preco, int quantidadeEstoque, ItemPedido itemPedido, List<Categoria> categorias)
+        public Produto(string nome, string marca, double preco, int quantidadeEstoque, List<ProdutoCategoria> produtoCategorias)
         {
             Nome = nome;
             Marca = marca;
             Preco = preco;
             QuantidadeEstoque = quantidadeEstoque;
-            ItemPedido = itemPedido;
-            Categorias = categorias;
+            ProdutoCategorias = produtoCategorias;
         }
 
         public Produto()

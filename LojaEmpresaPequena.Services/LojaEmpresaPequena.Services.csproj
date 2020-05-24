@@ -6,33 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200523232538_Inicial.cs" />
-    <Compile Remove="Migrations\20200523232538_Inicial.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.4" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.4" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LojaEmpresaPequena.Application\LojaEmpresaPequena.Application.csproj" />
     <ProjectReference Include="..\LojaEmpresaPequena.Context\LojaEmpresaPequena.Context.csproj" />
     <ProjectReference Include="..\LojaEmpresaPequena.Domain\LojaEmpresaPequena.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,8 @@ namespace LojaEmpresaPequena.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<Endereco> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.Usuario).WithMany(x => x.Enderecos);
         }
     }
 }

@@ -7,12 +7,13 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Context.Mappings
 {
-    public class DetalhesPedidoMapping : IEntityTypeConfiguration<DetalhesPedido>
+    public class UsuarioMapping : IEntityTypeConfiguration<Usuario>
     {
-        public void Configure(EntityTypeBuilder<DetalhesPedido> builder)
+        public void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Pedido).WithOne(x => x.DetalhesPedido);
+            builder.HasMany(x => x.Enderecos).WithOne(x => x.Usuario);
+            builder.HasMany(x => x.Pedidos).WithOne(x => x.Usuario);
         }
     }
 }

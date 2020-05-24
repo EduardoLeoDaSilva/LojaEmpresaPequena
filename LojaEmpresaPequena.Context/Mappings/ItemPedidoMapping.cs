@@ -11,7 +11,9 @@ namespace LojaEmpresaPequena.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<ItemPedido> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.Produto);
+            builder.HasOne(x => x.Pedido).WithMany(x => x.ItemPedidos);
         }
     }
 }

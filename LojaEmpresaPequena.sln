@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaEmpresaPequena.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaEmpresaPequena.Services", "LojaEmpresaPequena.Services\LojaEmpresaPequena.Services.csproj", "{39A59BBE-AE67-4645-8086-579F5FA3E4C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaEmpresaPequena.Context", "LojaEmpresaPequena.Context\LojaEmpresaPequena.Context.csproj", "{182B7E26-B717-4C81-95D0-4C5FE2F0BE43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaEmpresaPequena.Context", "LojaEmpresaPequena.Context\LojaEmpresaPequena.Context.csproj", "{182B7E26-B717-4C81-95D0-4C5FE2F0BE43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
