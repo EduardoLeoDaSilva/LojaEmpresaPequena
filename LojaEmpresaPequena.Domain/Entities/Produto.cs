@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LojaEmpresaPequena.Domain.Exceptions;
+using LojaEmpresaPequena.Domain.Resources;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +16,12 @@ namespace LojaEmpresaPequena.Domain.Entities
 
         public Produto(string nome, string marca, double preco, int quantidadeEstoque, List<ProdutoCategoria> produtoCategorias)
         {
+
+            VerifyDomainRules.CreateInstance()
+                .VerifyRule(String.IsNullOrEmpty(nome) || String.IsNullOrWhiteSpace(nome), ProgramMessages.NomeProdutoInvalido)
+                .VerifyRule(String.IsNullOrEmpty(marca) || String.IsNullOrWhiteSpace(marca), ProgramMessages.MarcaProdutoInvalida)
+                .ThrowExceptionDomain();
+
             Nome = nome;
             Marca = marca;
             Preco = preco;
@@ -21,9 +29,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             ProdutoCategorias = produtoCategorias;
         }
 
-        public Produto()
-        {
-        }
+
     }
 
 }

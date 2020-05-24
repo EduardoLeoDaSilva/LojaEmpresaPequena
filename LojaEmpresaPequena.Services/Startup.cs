@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using LojaEmpresaPequena.Context;
-
+using LojaEmpresaPequena.Services.Filters;
 
 namespace LojaEmpresaPequena.Services
 {
@@ -30,8 +30,15 @@ namespace LojaEmpresaPequena.Services
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         { 
-           services.AddDbContext<LojaEmpresaPequenaIdentity>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
+            //Ef e Identity
+            services.AddDbContext<LojaEmpresaPequenaIdentity>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
             services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentity>();
+
+
+            services.AddControllers(options => {
+                options.Filters.Add(typeof(ExceptionFilter));
+            });
+
 
             services.Configure<IdentityOptions>(options =>
             {
