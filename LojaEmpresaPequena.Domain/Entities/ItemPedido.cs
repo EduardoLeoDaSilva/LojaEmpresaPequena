@@ -13,6 +13,11 @@ namespace LojaEmpresaPequena.Domain.Entities
         public Pedido Pedido { get; set; }
         public Produto Produto { get; set; }
 
+
+        public ItemPedido()
+        {
+
+        }
         public ItemPedido(int quantidade, double preco, Pedido pedido, Produto produto)
         {
 

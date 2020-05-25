@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\ValuesController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
@@ -16,6 +22,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
 
@@ -23,6 +30,7 @@
     <ProjectReference Include="..\LojaEmpresaPequena.Application\LojaEmpresaPequena.Application.csproj" />
     <ProjectReference Include="..\LojaEmpresaPequena.Context\LojaEmpresaPequena.Context.csproj" />
     <ProjectReference Include="..\LojaEmpresaPequena.Domain\LojaEmpresaPequena.Domain.csproj" />
+    <ProjectReference Include="..\LojaEmpresaPequena.Ioc\LojaEmpresaPequena.Ioc.csproj" />
   </ItemGroup>
 
 </Project>

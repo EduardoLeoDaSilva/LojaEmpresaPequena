@@ -16,6 +16,11 @@ namespace LojaEmpresaPequena.Domain.Entities
         public List<Endereco> Enderecos { get; set; }
         public List<Pedido> Pedidos { get; set; }
 
+        public Usuario()
+        {
+
+        }
+
         public Usuario(string nome, string cpf, string role, List<Endereco> enderecos, List<Pedido> pedidos)
         {
 

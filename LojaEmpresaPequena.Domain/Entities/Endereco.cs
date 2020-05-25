@@ -18,6 +18,10 @@ namespace LojaEmpresaPequena.Domain.Entities
 
         public Usuario Usuario { get; set; }
 
+        public Endereco()
+        {
+
+        }
         public Endereco(string rua, string numero, string bairro, string cidade, string estado, string cep, string complemento, Usuario usuario)
         {
 

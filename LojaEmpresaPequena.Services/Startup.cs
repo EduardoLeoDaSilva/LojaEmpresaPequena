@@ -14,7 +14,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using LojaEmpresaPequena.Context;
-using LojaEmpresaPequena.Services.Filters;
+using MediatR;
+using System.Reflection;
+using LojaEmpresaPequena.Ioc;
+using LojaEmpresaPequena.Services.Middlewares;
 
 namespace LojaEmpresaPequena.Services
 {
@@ -29,17 +32,21 @@ namespace LojaEmpresaPequena.Services
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
+        {
+            services.AddMvc(options => {
+            options.EnableEndpointRouting = false;
+            });
+
+
             //Ef e Identity
             services.AddDbContext<LojaEmpresaPequenaIdentity>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
             services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentity>();
 
+            
+            DependencyInjector.Inject(services);
 
-            services.AddControllers(options => {
-                options.Filters.Add(typeof(ExceptionFilter));
-            });
-
-
+            var assemblyMediatr = Assembly.GetAssembly(typeof(LojaEmpresaPequena.Application.Commands.SaveProduto));
+            services.AddMediatR(assemblyMediatr);
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -72,22 +79,25 @@ namespace LojaEmpresaPequena.Services
             //    options.SlidingExpiration = true;
             //});
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+
+            app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseMvc();
         }

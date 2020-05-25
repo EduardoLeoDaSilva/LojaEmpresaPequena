@@ -11,6 +11,11 @@ namespace LojaEmpresaPequena.Domain.Entities
         public string DataAprovacao { get; set; }
         public Pedido Pedido { get; set; }
 
+
+        public DetalhesPedido()
+        {
+
+        }
         public DetalhesPedido(string dataAprovacao, Pedido pedido)
         {
 

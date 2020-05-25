@@ -14,7 +14,11 @@ namespace LojaEmpresaPequena.Domain.Entities
         public int QuantidadeEstoque { get; set; }
         public List<ProdutoCategoria> ProdutoCategorias { get; set; }
 
-        public Produto(string nome, string marca, double preco, int quantidadeEstoque, List<ProdutoCategoria> produtoCategorias)
+        public Produto()
+        {
+
+        }
+        public Produto(string nome, string marca, double preco, int quantidadeEstoque)
         {
 
             VerifyDomainRules.CreateInstance()
@@ -26,7 +30,6 @@ namespace LojaEmpresaPequena.Domain.Entities
             Marca = marca;
             Preco = preco;
             QuantidadeEstoque = quantidadeEstoque;
-            ProdutoCategorias = produtoCategorias;
         }
 
 

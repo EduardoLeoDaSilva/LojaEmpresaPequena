@@ -20,6 +20,10 @@ namespace LojaEmpresaPequena.Domain.Entities
 
         public DetalhesPedido DetalhesPedido{ get; set; }
 
+        public Pedido()
+        {
+
+        }
         public Pedido(DateTime dataPedido, DateTime dataEnvio, StatusPedido statusPedido, StatusEnvio statusEnvio, Usuario usuario, List<ItemPedido> itemPedidos, DetalhesPedido detalhesPedido)
         {
 

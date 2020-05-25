@@ -1,5 +1,7 @@
 ﻿using LojaEmpresaPequena.Context.Repositories;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
+using LojaEmpresaPequena.Domain.Interfaces.Services;
+using LojaEmpresaPequena.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,14 @@ namespace LojaEmpresaPequena.Ioc
             services.AddScoped<IItemPedidoRepository, ItemPedidoRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
+            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+            services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<IDetalhesPedidoService, DetalhesPedidoService>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
+            services.AddScoped<IItemPedidoService, ItemPedidoService>();
+            services.AddScoped<IPedidoService, PedidoService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
         }
     }
 }

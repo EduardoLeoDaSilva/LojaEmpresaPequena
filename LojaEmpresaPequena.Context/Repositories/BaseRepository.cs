@@ -17,6 +17,7 @@ namespace LojaEmpresaPequena.Context.Repositories
 
         public BaseRepository(LojaEmpresaPequenaIdentity context)
         {
+            _context = context;
             _dbSet = context.Set<Entity>();
         }
 
