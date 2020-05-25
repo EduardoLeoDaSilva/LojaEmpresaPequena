@@ -1,4 +1,5 @@
 ﻿using LojaEmpresaPequena.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,14 +16,19 @@ namespace LojaEmpresaPequena.Context
 
             public LojaEmpresaPequenaIdentity(DbContextOptions options) : base(options)
             {
-
-            }
+            this.Database.EnsureCreated();
+        }
             protected override void OnModelCreating(ModelBuilder builder)
             {
-                builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
                 base.OnModelCreating(builder);
-            }
-
+            this.Roles.Add(new IdentityRole("Admin"));
+            this.Roles.Add(new IdentityRole("Cliente"));
+            this.SaveChanges();
         }
+
+
+    }
     
 }

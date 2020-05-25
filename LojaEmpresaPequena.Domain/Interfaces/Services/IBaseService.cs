@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Domain.Interfaces.Services
 {
@@ -12,8 +13,8 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Services
         public void Save(Entity entity);
         public void Delete(Guid id);
         public void Update(Entity entity);
-        public IQueryable<Entity> GetAll(int pageIndex = 0, int pageSize = 10);
-        public Entity GetById(Guid id);
+        public IQueryable<Entity> GetAll();
+        public Task<Entity> GetById(Guid id);
 
     }
 }

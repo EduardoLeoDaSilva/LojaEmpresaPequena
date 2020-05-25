@@ -8,7 +8,7 @@ namespace LojaEmpresaPequena.Domain.Entities
 {
     public class DetalhesPedido : BaseEntity
     {
-        public string DataAprovacao { get; set; }
+        public DateTime? DataAprovacao { get; set; }
         public Pedido Pedido { get; set; }
 
 
@@ -16,7 +16,7 @@ namespace LojaEmpresaPequena.Domain.Entities
         {
 
         }
-        public DetalhesPedido(string dataAprovacao, Pedido pedido)
+        public DetalhesPedido(DateTime? dataAprovacao, Pedido pedido)
         {
 
             VerifyDomainRules.CreateInstance()

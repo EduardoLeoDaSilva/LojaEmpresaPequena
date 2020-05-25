@@ -9,8 +9,8 @@ namespace LojaEmpresaPequena.Domain.Entities
 {
     public class Pedido : BaseEntity
     {
-        public DateTime DataPedido { get; set; }
-        public DateTime DataEnvio { get; set; }
+        public DateTime? DataPedido { get; set; }
+        public DateTime? DataEnvio { get; set; }
         public StatusPedido? StatusPedido { get; set; }
         public StatusEnvio? StatusEnvio { get; set; }
 
@@ -24,7 +24,7 @@ namespace LojaEmpresaPequena.Domain.Entities
         {
 
         }
-        public Pedido(DateTime dataPedido, DateTime dataEnvio, StatusPedido statusPedido, StatusEnvio statusEnvio, Usuario usuario, List<ItemPedido> itemPedidos, DetalhesPedido detalhesPedido)
+        public Pedido(DateTime? dataPedido, DateTime? dataEnvio, StatusPedido statusPedido, StatusEnvio statusEnvio, Usuario usuario, List<ItemPedido> itemPedidos)
         {
 
 
@@ -40,7 +40,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             StatusEnvio = statusEnvio;
             Usuario = usuario;
             ItemPedidos = itemPedidos;
-            DetalhesPedido = detalhesPedido;
+            DetalhesPedido = new DetalhesPedido(null, this);
         }
 
     }

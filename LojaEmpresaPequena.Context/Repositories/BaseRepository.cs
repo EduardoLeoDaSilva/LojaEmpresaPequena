@@ -5,14 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Context.Repositories
 {
     public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : BaseEntity
     {
 
-        private readonly DbSet<Entity>  _dbSet;
-        private readonly LojaEmpresaPequenaIdentity _context;
+        protected readonly DbSet<Entity>  _dbSet;
+        protected readonly LojaEmpresaPequenaIdentity _context;
 
 
         public BaseRepository(LojaEmpresaPequenaIdentity context)
@@ -21,34 +22,34 @@ namespace LojaEmpresaPequena.Context.Repositories
             _dbSet = context.Set<Entity>();
         }
 
-        public void Delete(Guid id)
+        public async virtual void Delete(Guid id)
         {
-            var entityFromDb = _dbSet.Find(id);
+            var entityFromDb = await _dbSet.FindAsync(id);
             _context.SaveChanges();
         }
 
-        public IQueryable<Entity> GetAll(int pageIndex = 0, int pageSize = 10)
+        public virtual IQueryable<Entity> GetAll()
         {
-            var listFromDb = _dbSet.Skip(pageIndex).Take(pageSize);
+            var listFromDb = _dbSet;
             return listFromDb;
         }
 
-        public Entity GetById(Guid id)
+        public async virtual Task<Entity> GetById(Guid id)
         {
-            var entityFromDb = _dbSet.Find(id);
+            var entityFromDb = await _dbSet.FindAsync(id);
             return entityFromDb;
         }
 
-        public void Save(Entity entidade)
+        public async virtual void Save(Entity entidade)
         {
             _dbSet.Add(entidade);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
-        public void Update(Entity entidade)
+        public async virtual void Update(Entity entidade)
         {
             _dbSet.Update(entidade);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
     }
 }

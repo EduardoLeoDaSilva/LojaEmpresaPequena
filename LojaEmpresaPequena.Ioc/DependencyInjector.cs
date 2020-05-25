@@ -1,7 +1,9 @@
 ﻿using LojaEmpresaPequena.Context.Repositories;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
 using LojaEmpresaPequena.Domain.Interfaces.Services;
+using LojaEmpresaPequena.Domain.Interfaces.Services.Email;
 using LojaEmpresaPequena.Domain.Services;
+using LojaEmpresaPequena.Domain.Services.Email;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,7 @@ namespace LojaEmpresaPequena.Ioc
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
+            //services
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<IDetalhesPedidoService, DetalhesPedidoService>();
@@ -29,6 +32,8 @@ namespace LojaEmpresaPequena.Ioc
             services.AddScoped<IItemPedidoService, ItemPedidoService>();
             services.AddScoped<IPedidoService, PedidoService>();
             services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IEmailService, EmailService>();
         }
     }
 }

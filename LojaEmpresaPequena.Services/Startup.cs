@@ -42,13 +42,15 @@ namespace LojaEmpresaPequena.Services
             services.AddDbContext<LojaEmpresaPequenaIdentity>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
             services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentity>();
 
-            
+
+
             DependencyInjector.Inject(services);
 
-            var assemblyMediatr = Assembly.GetAssembly(typeof(LojaEmpresaPequena.Application.Commands.SaveProduto));
+            var assemblyMediatr = Assembly.GetAssembly(typeof(LojaEmpresaPequena.Application.ProdutoMediator.Commands.SaveProduto));
             services.AddMediatR(assemblyMediatr);
             services.Configure<IdentityOptions>(options =>
             {
+
                 // Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -62,11 +64,17 @@ namespace LojaEmpresaPequena.Services
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = false;
 
+                //mudar dpos
+                options.SignIn.RequireConfirmedEmail = false;
+
                 // User settings.
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.AddSession();
+            services.AddDistributedMemoryCache();
 
             //services.ConfigureApplicationCookie(options =>
             //{
@@ -98,6 +106,8 @@ namespace LojaEmpresaPequena.Services
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

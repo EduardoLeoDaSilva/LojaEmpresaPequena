@@ -126,8 +126,14 @@
   <data name="CidadeInvalida" xml:space="preserve">
     <value>Cidade inválida!</value>
   </data>
+  <data name="ConfigErro" xml:space="preserve">
+    <value>Falha ao tentar obter configurações!</value>
+  </data>
   <data name="CpfInvalido" xml:space="preserve">
     <value>Cpf inválido!</value>
+  </data>
+  <data name="EmailInvalido" xml:space="preserve">
+    <value>Email informado inválido!</value>
   </data>
   <data name="EstadoInvalido" xml:space="preserve">
     <value>Estado inválido!</value>
@@ -158,6 +164,12 @@
   </data>
   <data name="RuaInvalida" xml:space="preserve">
     <value>Rua inválida!</value>
+  </data>
+  <data name="SendEmailErro" xml:space="preserve">
+    <value>Erro ao tentar enviar email - Falha na validação</value>
+  </data>
+  <data name="SenhaInvalida" xml:space="preserve">
+    <value>Senha é inválida</value>
   </data>
   <data name="StatusEnvioInvalido" xml:space="preserve">
     <value>Status do envio inválido!</value>

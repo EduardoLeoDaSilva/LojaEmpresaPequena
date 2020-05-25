@@ -1,21 +1,23 @@
 ﻿using LojaEmpresaPequena.Domain.Entities;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
+using LojaEmpresaPequena.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Domain.Services
 {
-    public class BaseService<Entity> : IBaseRepository<Entity> where Entity : BaseEntity
+    public class BaseService<Entity> : IBaseService<Entity> where Entity : BaseEntity
     {
-        IBaseRepository<Entity> _repository;
+        private readonly IBaseRepository<Entity> _repository;
         public BaseService(IBaseRepository<Entity> repository)
         {
             _repository = repository;
         }
 
-        public virtual void Save(Entity entity)
+        public  virtual void Save(Entity entity)
         {
             _repository.Save(entity);
         }
@@ -30,14 +32,15 @@ namespace LojaEmpresaPequena.Domain.Services
             _repository.Save(entity);
         }
 
-        public virtual IQueryable<Entity> GetAll(int pageIndex = 0, int pageSize = 10) 
+        public virtual IQueryable<Entity> GetAll() 
         {
-            return _repository.GetAll(pageIndex, pageSize);
+            return _repository.GetAll();
         }
 
-        public virtual Entity GetById(Guid id)
+        public async virtual Task<Entity> GetById(Guid id)
         {
-            return _repository.GetById(id);
+            return await _repository.GetById(id);
         }
+
     }
 }

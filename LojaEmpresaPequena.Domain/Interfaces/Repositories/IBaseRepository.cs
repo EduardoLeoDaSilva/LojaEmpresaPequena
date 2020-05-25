@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Domain.Interfaces.Repositories
 {
@@ -12,9 +13,9 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Repositories
 
         public void Delete(Guid id);
 
-        public IQueryable<Entity> GetAll(int pageIndex = 0, int pageSize = 10);
+        public IQueryable<Entity> GetAll();
 
-        public Entity GetById(Guid id);
+        public Task<Entity> GetById(Guid id);
 
         public void Update(Entity entidade);
     }

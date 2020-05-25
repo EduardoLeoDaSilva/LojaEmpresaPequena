@@ -88,11 +88,29 @@ namespace LojaEmpresaPequena.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Falha ao tentar obter configurações!.
+        /// </summary>
+        public static string ConfigErro {
+            get {
+                return ResourceManager.GetString("ConfigErro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Cpf inválido!.
         /// </summary>
         public static string CpfInvalido {
             get {
                 return ResourceManager.GetString("CpfInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Email informado inválido!.
+        /// </summary>
+        public static string EmailInvalido {
+            get {
+                return ResourceManager.GetString("EmailInvalido", resourceCulture);
             }
         }
         
@@ -183,6 +201,24 @@ namespace LojaEmpresaPequena.Domain.Resources {
         public static string RuaInvalida {
             get {
                 return ResourceManager.GetString("RuaInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao tentar enviar email - Falha na validação.
+        /// </summary>
+        public static string SendEmailErro {
+            get {
+                return ResourceManager.GetString("SendEmailErro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha é inválida.
+        /// </summary>
+        public static string SenhaInvalida {
+            get {
+                return ResourceManager.GetString("SenhaInvalida", resourceCulture);
             }
         }
         
