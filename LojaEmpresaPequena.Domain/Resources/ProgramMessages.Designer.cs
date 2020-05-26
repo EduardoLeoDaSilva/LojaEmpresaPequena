@@ -70,6 +70,24 @@ namespace LojaEmpresaPequena.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Produto cadastrado com sucesso!.
+        /// </summary>
+        public static string CadastroProdSucesso {
+            get {
+                return ResourceManager.GetString("CadastroProdSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao tentar obter o categoria!.
+        /// </summary>
+        public static string CategoriaAttempt {
+            get {
+                return ResourceManager.GetString("CategoriaAttempt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Cep inválido!.
         /// </summary>
         public static string CepInvalido {
@@ -115,6 +133,15 @@ namespace LojaEmpresaPequena.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao tentar obter o Endereço!.
+        /// </summary>
+        public static string EnderecoAttempt {
+            get {
+                return ResourceManager.GetString("EnderecoAttempt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Estado inválido!.
         /// </summary>
         public static string EstadoInvalido {
@@ -124,11 +151,38 @@ namespace LojaEmpresaPequena.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro ao tentar realizar a operação!.
+        /// </summary>
+        public static string Falha {
+            get {
+                return ResourceManager.GetString("Falha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Id requisitado inválido.
+        /// </summary>
+        public static string IdErro {
+            get {
+                return ResourceManager.GetString("IdErro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a A marca do produto é inválida!.
         /// </summary>
         public static string MarcaProdutoInvalida {
             get {
                 return ResourceManager.GetString("MarcaProdutoInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro interno - Metódo não implementado.
+        /// </summary>
+        public static string MetodoNImplementado {
+            get {
+                return ResourceManager.GetString("MetodoNImplementado", resourceCulture);
             }
         }
         
@@ -174,6 +228,15 @@ namespace LojaEmpresaPequena.Domain.Resources {
         public static string PedidoInvalido {
             get {
                 return ResourceManager.GetString("PedidoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao tentar obter o produto!.
+        /// </summary>
+        public static string ProdAttempt {
+            get {
+                return ResourceManager.GetString("ProdAttempt", resourceCulture);
             }
         }
         
@@ -237,6 +300,42 @@ namespace LojaEmpresaPequena.Domain.Resources {
         public static string StatusPedidoInvalido {
             get {
                 return ResourceManager.GetString("StatusPedidoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Operação realizada com sucesso!.
+        /// </summary>
+        public static string Sucesso {
+            get {
+                return ResourceManager.GetString("Sucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro ao tentar buscar o categorias!.
+        /// </summary>
+        public static string TentarBuscarCategoriaErro {
+            get {
+                return ResourceManager.GetString("TentarBuscarCategoriaErro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro ao tentar buscar o endereços!.
+        /// </summary>
+        public static string TentarBuscarEnderecoErro {
+            get {
+                return ResourceManager.GetString("TentarBuscarEnderecoErro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro ao tentar buscar o produtos!.
+        /// </summary>
+        public static string TentarBuscarProdErro {
+            get {
+                return ResourceManager.GetString("TentarBuscarProdErro", resourceCulture);
             }
         }
         

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Context.Repositories
 {
-    public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : BaseEntity
+    public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : BaseEntity<Entity>
     {
 
         protected readonly DbSet<Entity>  _dbSet;

@@ -8,6 +8,7 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Services
 {
     public interface IPedidoService:IBaseService<Pedido>
     {
+        Pedido GetCurrentPedido(Usuario usuario);
         Task<Pedido> CreatePedido(Usuario usuario);
     }
 }

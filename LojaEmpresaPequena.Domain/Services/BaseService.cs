@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Domain.Services
 {
-    public class BaseService<Entity> : IBaseService<Entity> where Entity : BaseEntity
+    public class BaseService<Entity> : IBaseService<Entity> where Entity : BaseEntity<Entity>
     {
         private readonly IBaseRepository<Entity> _repository;
         public BaseService(IBaseRepository<Entity> repository)
@@ -29,7 +29,7 @@ namespace LojaEmpresaPequena.Domain.Services
 
         public virtual void Update(Entity entity)
         {
-            _repository.Save(entity);
+            _repository.Update(entity);
         }
 
         public virtual IQueryable<Entity> GetAll() 

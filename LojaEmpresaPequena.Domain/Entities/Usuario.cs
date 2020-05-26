@@ -1,4 +1,5 @@
-﻿using LojaEmpresaPequena.Domain.Exceptions;
+﻿using LojaEmpresaPequena.Domain.Entities.Interfaces;
+using LojaEmpresaPequena.Domain.Exceptions;
 using LojaEmpresaPequena.Domain.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-   public class Usuario : IdentityUser
+   public class Usuario : IdentityUser, IBaseEntity<Usuario>
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }
@@ -25,7 +26,7 @@ namespace LojaEmpresaPequena.Domain.Entities
         {
 
             VerifyDomainRules.CreateInstance().VerifyRule(String.IsNullOrEmpty(nome) || String.IsNullOrWhiteSpace(nome), ProgramMessages.NomeInvalido)
-                .VerifyRule(String.IsNullOrEmpty(nome) || String.IsNullOrWhiteSpace(nome), ProgramMessages.CpfInvalido).ThrowExceptionDomain();
+                .VerifyRule(String.IsNullOrEmpty(cpf) || String.IsNullOrWhiteSpace(cpf), ProgramMessages.CpfInvalido).ThrowExceptionDomain();
                 
             Nome = nome;
             Cpf = cpf;
@@ -34,5 +35,17 @@ namespace LojaEmpresaPequena.Domain.Entities
             Pedidos = pedidos;
         }
 
+        public void UpdateInstance(Usuario e)
+        {
+            VerifyDomainRules.CreateInstance().VerifyRule(String.IsNullOrEmpty(e.Nome) || String.IsNullOrWhiteSpace(e.Nome), ProgramMessages.NomeInvalido)
+                 .VerifyRule(String.IsNullOrEmpty(e.Cpf) || String.IsNullOrWhiteSpace(e.Cpf), ProgramMessages.CpfInvalido).ThrowExceptionDomain();
+
+            Nome = e.Nome;
+            Cpf = e.Cpf;
+            Role = e.Role;
+            Enderecos = e.Enderecos;
+            Pedidos = e.Pedidos;
+
+        }
     }
 }

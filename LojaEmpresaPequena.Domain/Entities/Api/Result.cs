@@ -25,7 +25,7 @@ namespace LojaEmpresaPequena.Domain.Entities.Api
             Errors = errors;
         }
 
-        public static  Task<Result<Entity>> Fail(bool v, params string[] erros)
+        public static  Task<Result<Entity>> Fail(params string[] erros)
         {
             var result = new Result<Entity>(false, erros);
             return Task.FromResult(result);

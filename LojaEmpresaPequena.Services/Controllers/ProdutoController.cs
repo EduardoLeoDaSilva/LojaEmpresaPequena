@@ -27,5 +27,27 @@ namespace LojaEmpresaPequena.Services.Controllers
             var result = await _media.Send(produto);
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProduto(SaveProduto.SaveProdutoContract produto)
+        {
+            var result = await _media.Send(produto);
+            return Ok(result);
+        }
+
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateProduto(SaveProduto.SaveProdutoContract produto)
+        {
+            var result = await _media.Send(produto);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProduto(SaveProduto.SaveProdutoContract produto)
+        {
+            var result = await _media.Send(produto);
+            return Ok(result);
+        }
     }
 }

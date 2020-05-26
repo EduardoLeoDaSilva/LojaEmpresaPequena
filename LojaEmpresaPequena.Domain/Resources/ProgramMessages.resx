@@ -120,6 +120,12 @@
   <data name="BairroInvalido" xml:space="preserve">
     <value>Bairro inválido!</value>
   </data>
+  <data name="CadastroProdSucesso" xml:space="preserve">
+    <value>Produto cadastrado com sucesso!</value>
+  </data>
+  <data name="CategoriaAttempt" xml:space="preserve">
+    <value>Erro ao tentar obter o categoria!</value>
+  </data>
   <data name="CepInvalido" xml:space="preserve">
     <value>Cep inválido!</value>
   </data>
@@ -135,11 +141,23 @@
   <data name="EmailInvalido" xml:space="preserve">
     <value>Email informado inválido!</value>
   </data>
+  <data name="EnderecoAttempt" xml:space="preserve">
+    <value>Erro ao tentar obter o Endereço!</value>
+  </data>
   <data name="EstadoInvalido" xml:space="preserve">
     <value>Estado inválido!</value>
   </data>
+  <data name="Falha" xml:space="preserve">
+    <value>Ocorreu um erro ao tentar realizar a operação!</value>
+  </data>
+  <data name="IdErro" xml:space="preserve">
+    <value>Id requisitado inválido</value>
+  </data>
   <data name="MarcaProdutoInvalida" xml:space="preserve">
     <value>A marca do produto é inválida!</value>
+  </data>
+  <data name="MetodoNImplementado" xml:space="preserve">
+    <value>Ocorreu um erro interno - Metódo não implementado</value>
   </data>
   <data name="NomeCategoria" xml:space="preserve">
     <value>Nome categoria inválido!</value>
@@ -155,6 +173,9 @@
   </data>
   <data name="PedidoInvalido" xml:space="preserve">
     <value>Pedido inválido!</value>
+  </data>
+  <data name="ProdAttempt" xml:space="preserve">
+    <value>Erro ao tentar obter o produto!</value>
   </data>
   <data name="ProdutoInvalido" xml:space="preserve">
     <value>Produto inválido!</value>
@@ -176,6 +197,18 @@
   </data>
   <data name="StatusPedidoInvalido" xml:space="preserve">
     <value>Status do Pedido inválido!</value>
+  </data>
+  <data name="Sucesso" xml:space="preserve">
+    <value>Operação realizada com sucesso!</value>
+  </data>
+  <data name="TentarBuscarCategoriaErro" xml:space="preserve">
+    <value>Ocorreu um erro ao tentar buscar o categorias!</value>
+  </data>
+  <data name="TentarBuscarEnderecoErro" xml:space="preserve">
+    <value>Ocorreu um erro ao tentar buscar o endereços!</value>
+  </data>
+  <data name="TentarBuscarProdErro" xml:space="preserve">
+    <value>Ocorreu um erro ao tentar buscar o produtos!</value>
   </data>
   <data name="UsuarioNulo" xml:space="preserve">
     <value>Usuário inválido (Nulo)!</value>

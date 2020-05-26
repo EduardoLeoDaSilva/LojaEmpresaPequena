@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-    public class Pedido : BaseEntity
+    public class Pedido : BaseEntity<Pedido>
     {
         public DateTime? DataPedido { get; set; }
         public DateTime? DataEnvio { get; set; }
@@ -24,7 +24,7 @@ namespace LojaEmpresaPequena.Domain.Entities
         {
 
         }
-        public Pedido(DateTime? dataPedido, DateTime? dataEnvio, StatusPedido statusPedido, StatusEnvio statusEnvio, Usuario usuario, List<ItemPedido> itemPedidos)
+        public Pedido(DateTime? dataPedido, DateTime? dataEnvio, StatusPedido? statusPedido, StatusEnvio? statusEnvio, Usuario usuario, List<ItemPedido> itemPedidos)
         {
 
 
@@ -41,6 +41,25 @@ namespace LojaEmpresaPequena.Domain.Entities
             Usuario = usuario;
             ItemPedidos = itemPedidos;
             DetalhesPedido = new DetalhesPedido(null, this);
+        }
+
+        public override void UpdateInstance(Pedido e)
+        {
+            VerifyDomainRules.CreateInstance()
+                .VerifyRule(e.Usuario == null, ProgramMessages.UsuarioNulo)
+                .VerifyRule(e.StatusEnvio == null, ProgramMessages.StatusEnvioInvalido)
+                .VerifyRule(e.StatusPedido == null, ProgramMessages.StatusPedidoInvalido)
+                .ThrowExceptionDomain();
+            base.UpdateInstance(e);
+
+            DataPedido = e.DataPedido;
+            DataEnvio = e.DataEnvio;
+            StatusPedido = e.StatusPedido;
+            StatusEnvio = e.StatusEnvio;
+            Usuario = e.Usuario;
+            ItemPedidos = e.ItemPedidos;
+            DetalhesPedido = e.DetalhesPedido;
+
         }
 
     }

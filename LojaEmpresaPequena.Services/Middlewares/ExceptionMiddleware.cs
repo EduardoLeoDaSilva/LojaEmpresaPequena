@@ -44,12 +44,12 @@ namespace LojaEmpresaPequena.Services.Middlewares
             if (ex.InnerException is DominioException)
             {
                 var dominioException = (DominioException)ex.InnerException;
-                var result = await Result<string>.Fail(false, dominioException.Errors.ToArray());
+                var result = await Result<string>.Fail(dominioException.Errors.ToArray());
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(new { data = result.Data, success = result.Success, errors = result.Errors }));
             }
             else
             {
-                var result = await Result<string>.Fail(false, ex.Message);
+                var result = await Result<string>.Fail(ex.Message);
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(new { data = result.Data, success = result.Success, errors = result.Errors }));
             }
 

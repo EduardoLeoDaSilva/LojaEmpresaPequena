@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-   public class Categoria : BaseEntity
+   public class Categoria : BaseEntity<Categoria>
     {
         public string Nome { get; set; }
         public List<ProdutoCategoria> ProdutoCategorias { get; set; }
@@ -23,7 +23,14 @@ namespace LojaEmpresaPequena.Domain.Entities
                 .ThrowExceptionDomain();
 
             Nome = nome;
+        }
 
+        public override void UpdateInstance(Categoria e)
+        {
+            VerifyDomainRules.CreateInstance()
+                .VerifyRule(String.IsNullOrEmpty(e.Nome) || String.IsNullOrWhiteSpace(e.Nome), ProgramMessages.NomeCategoria)
+                .ThrowExceptionDomain();
+            this.Nome = e.Nome;
         }
 
     }

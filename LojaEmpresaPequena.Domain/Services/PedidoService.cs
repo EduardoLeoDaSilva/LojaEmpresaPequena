@@ -22,6 +22,10 @@ namespace LojaEmpresaPequena.Domain.Services
         }
 
 
+        public  Pedido GetCurrentPedido(Usuario usuario)
+        {
+            return _repository.GetCurrentPedido(usuario);
+        }
     
         public async Task<Pedido> CreatePedido(Usuario usuario)
         {

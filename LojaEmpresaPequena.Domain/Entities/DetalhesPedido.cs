@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-    public class DetalhesPedido : BaseEntity
+    public class DetalhesPedido : BaseEntity<DetalhesPedido>
     {
         public DateTime? DataAprovacao { get; set; }
         public Pedido Pedido { get; set; }
@@ -26,6 +26,14 @@ namespace LojaEmpresaPequena.Domain.Entities
 
             DataAprovacao = dataAprovacao;
             Pedido = pedido;
+        }
+
+        public override void UpdateInstance(DetalhesPedido e)
+        {
+            VerifyDomainRules.CreateInstance()
+               .VerifyRule(e.Pedido == null, ProgramMessages.ProdutoInvalido)
+               .ThrowExceptionDomain();
+            this.Pedido = e.Pedido;
         }
 
     }

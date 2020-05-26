@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Domain.Interfaces.Services
 {
-    public interface IBaseService<Entity> where Entity : BaseEntity
+    public interface IBaseService<Entity> where Entity : BaseEntity<Entity>
     {
 
         public void Save(Entity entity);

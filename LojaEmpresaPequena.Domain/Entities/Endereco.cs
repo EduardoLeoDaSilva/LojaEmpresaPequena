@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
-    public class Endereco : BaseEntity
+    public class Endereco : BaseEntity<Endereco>
     {
         public string Rua { get; set; }
         public  string Numero { get; set; }
@@ -43,6 +43,28 @@ namespace LojaEmpresaPequena.Domain.Entities
             Cep = cep;
             Complemento = complemento;
             Usuario = usuario;
+        }
+
+        public override void UpdateInstance(Endereco e)
+        {
+            VerifyDomainRules.CreateInstance()
+                .VerifyRule(String.IsNullOrEmpty(e.Rua) || String.IsNullOrWhiteSpace(e.Rua), ProgramMessages.RuaInvalida)
+                .VerifyRule(String.IsNullOrEmpty(e.Numero) || String.IsNullOrWhiteSpace(e.Numero), ProgramMessages.NumeroInvalido)
+                .VerifyRule(String.IsNullOrEmpty(e.Bairro) || String.IsNullOrWhiteSpace(e.Bairro), ProgramMessages.BairroInvalido)
+                .VerifyRule(String.IsNullOrEmpty(e.Cidade) || String.IsNullOrWhiteSpace(e.Cidade), ProgramMessages.CidadeInvalida)
+                .VerifyRule(String.IsNullOrEmpty(e.Estado) || String.IsNullOrWhiteSpace(e.Estado), ProgramMessages.EstadoInvalido)
+                .VerifyRule(String.IsNullOrEmpty(e.Cep) || String.IsNullOrWhiteSpace(e.Cep), ProgramMessages.CepInvalido)
+                .VerifyRule(e.Usuario == null, ProgramMessages.UsuarioNulo)
+                .ThrowExceptionDomain();
+
+            Rua = e.Rua;
+            Numero = e.Numero;
+            Bairro = e.Bairro;
+            Cidade = e.Cidade;
+            Estado = e.Estado;
+            Cep = e.Cep;
+            Complemento = e.Complemento;
+            Usuario = e.Usuario;
         }
     }
 
