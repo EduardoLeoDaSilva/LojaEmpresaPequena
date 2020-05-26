@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\ItemPedidoMediator\" />
-    <Folder Include="Commands\PedidoMediator\" />
-    <Folder Include="Queries\ItemPedidoMediator\" />
-    <Folder Include="Queries\PedidoMediator\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 
