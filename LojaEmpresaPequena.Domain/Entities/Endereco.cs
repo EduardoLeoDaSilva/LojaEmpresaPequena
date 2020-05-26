@@ -66,6 +66,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             Complemento = e.Complemento;
             Usuario = e.Usuario;
         }
+
     }
 
 }

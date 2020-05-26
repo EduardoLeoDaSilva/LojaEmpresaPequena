@@ -1,4 +1,5 @@
-﻿using LojaEmpresaPequena.Domain.Exceptions;
+﻿using LojaEmpresaPequena.Domain.Enums;
+using LojaEmpresaPequena.Domain.Exceptions;
 using LojaEmpresaPequena.Domain.Resources;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,19 @@ namespace LojaEmpresaPequena.Domain.Entities
         public DateTime? DataAprovacao { get; set; }
         public Pedido Pedido { get; set; }
 
+        public TipoPagamento? TipoPagamento { get; set; }
+
 
         public DetalhesPedido()
         {
 
         }
-        public DetalhesPedido(DateTime? dataAprovacao, Pedido pedido)
+        public DetalhesPedido(DateTime? dataAprovacao, Pedido pedido, TipoPagamento? tipoPagamento)
         {
 
             VerifyDomainRules.CreateInstance()
                 .VerifyRule(pedido == null, ProgramMessages.ProdutoInvalido)
+                .VerifyRule(tipoPagamento == null, ProgramMessages.TipoPagamentoInvalido)
                 .ThrowExceptionDomain();
                 
 

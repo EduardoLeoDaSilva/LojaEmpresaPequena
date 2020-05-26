@@ -340,6 +340,24 @@ namespace LojaEmpresaPequena.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tipo pagamento inválido!.
+        /// </summary>
+        public static string TipoPagamentoInvalido {
+            get {
+                return ResourceManager.GetString("TipoPagamentoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A Url informada é inválida!.
+        /// </summary>
+        public static string UrlInvalida {
+            get {
+                return ResourceManager.GetString("UrlInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário inválido (Nulo)!.
         /// </summary>
         public static string UsuarioNulo {

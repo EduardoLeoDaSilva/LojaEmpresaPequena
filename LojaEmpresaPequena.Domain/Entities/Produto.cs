@@ -14,6 +14,8 @@ namespace LojaEmpresaPequena.Domain.Entities
         public int QuantidadeEstoque { get; set; }
         public List<ProdutoCategoria> ProdutoCategorias { get; set; }
 
+        public string FotoUrl { get; set; }
+
         public Produto()
         {
 
@@ -43,6 +45,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             Marca = e.Marca;
             Preco = e.Preco;
             QuantidadeEstoque = e.QuantidadeEstoque;
+            FotoUrl = e.FotoUrl;
         }
 
 

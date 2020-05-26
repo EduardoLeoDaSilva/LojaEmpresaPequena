@@ -11,21 +11,25 @@ namespace LojaEmpresaPequena.Domain.Entities
    public class Usuario : IdentityUser, IBaseEntity<Usuario>
     {
         public string Nome { get; set; }
+        public string SobreNome { get; set; }
         public string Cpf { get; set; }
         public string Role { get; set; }
  
         public List<Endereco> Enderecos { get; set; }
         public List<Pedido> Pedidos { get; set; }
 
+        public string Telefone { get; set; }
+        public string CodigoDeArea { get; set; }
         public Usuario()
         {
 
         }
 
-        public Usuario(string nome, string cpf, string role, List<Endereco> enderecos, List<Pedido> pedidos)
+        public Usuario(string nome, string cpf, string role, List<Endereco> enderecos, List<Pedido> pedidos, string email)
         {
 
             VerifyDomainRules.CreateInstance().VerifyRule(String.IsNullOrEmpty(nome) || String.IsNullOrWhiteSpace(nome), ProgramMessages.NomeInvalido)
+                .VerifyRule(String.IsNullOrEmpty(email) || String.IsNullOrWhiteSpace(email), ProgramMessages.EmailInvalido)
                 .VerifyRule(String.IsNullOrEmpty(cpf) || String.IsNullOrWhiteSpace(cpf), ProgramMessages.CpfInvalido).ThrowExceptionDomain();
                 
             Nome = nome;
@@ -33,6 +37,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             Role = role;
             Enderecos = enderecos;
             Pedidos = pedidos;
+            Email = email;
         }
 
         public void UpdateInstance(Usuario e)
@@ -45,6 +50,8 @@ namespace LojaEmpresaPequena.Domain.Entities
             Role = e.Role;
             Enderecos = e.Enderecos;
             Pedidos = e.Pedidos;
+            Telefone = e.Telefone;
+            CodigoDeArea = e.CodigoDeArea;
 
         }
     }
