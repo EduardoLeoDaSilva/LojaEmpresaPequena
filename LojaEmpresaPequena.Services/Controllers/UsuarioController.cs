@@ -11,5 +11,50 @@ namespace LojaEmpresaPequena.Services.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
+
+        private readonly IMediator _media;
+        public EnderecoController(IMediator media)
+        {
+            _media = media;
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Save([FromBody]CreateEndereco.CreadeEnderecoContract endereco)
+        {
+            var result = await _media.Send(endereco);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllEnderecos(GetAllEnderecos.GetAllEnderecosContract endereco)
+        {
+            var result = await _media.Send(endereco);
+            return Ok(result);
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetEnderecoById(GetAllEnderecos.GetAllEnderecosContract endereco)
+        {
+            var result = await _media.Send(endereco);
+            return Ok(result);
+        }
+
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateEndereco([FromBody]UpdateEndereco.UpdateEnderecoContract endereco)
+        {
+            var result = await _media.Send(endereco);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteEndereco(DeleteEndereco.DeleteEnderecoContract endereco)
+        {
+            var result = await _media.Send(endereco);
+            return Ok(result);
+        }
+
+
     }
 }

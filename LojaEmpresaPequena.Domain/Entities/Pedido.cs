@@ -9,7 +9,9 @@ namespace LojaEmpresaPequena.Domain.Entities
 {
     public class Pedido : BaseEntity<Pedido>
     {
+        public string CodigoPedido { get; set; }
         public DateTime? DataPedido { get; set; }
+
         public DateTime? DataEnvio { get; set; }
         public StatusPedido? StatusPedido { get; set; }
         public StatusEnvio? StatusEnvio { get; set; }
@@ -40,7 +42,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             StatusEnvio = statusEnvio;
             Usuario = usuario;
             ItemPedidos = itemPedidos;
-            DetalhesPedido = new DetalhesPedido(null, this);
+            DetalhesPedido = new DetalhesPedido(null, this, null);
         }
 
         public override void UpdateInstance(Pedido e)

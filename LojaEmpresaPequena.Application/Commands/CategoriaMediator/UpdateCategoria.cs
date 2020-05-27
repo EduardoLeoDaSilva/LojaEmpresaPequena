@@ -12,20 +12,20 @@ namespace LojaEmpresaPequena.Application.Commands.CategoriaMediator
 {
     public class UpdateCategoria
     {
-        public class UpateCategoriaContract : IRequest<Result<string>>
+        public class UpdateCategoriaContract : IRequest<Result<string>>
         {
             public Guid Id { get; set; }
             public string Nome { get; set; }
         }
 
-        public class Handler : IRequestHandler<UpateCategoriaContract, Result<string>>
+        public class Handler : IRequestHandler<UpdateCategoriaContract, Result<string>>
         {
             private ICategoriaService _categoriaService;
             public Handler(ICategoriaService categoriaService)
             {
                 _categoriaService = categoriaService;
             }
-            public async Task<Result<string>> Handle(UpateCategoriaContract request, CancellationToken cancellationToken)
+            public async Task<Result<string>> Handle(UpdateCategoriaContract request, CancellationToken cancellationToken)
             {
                 if (request.Id == null)
                     return await Result<string>.Fail(ProgramMessages.IdErro);

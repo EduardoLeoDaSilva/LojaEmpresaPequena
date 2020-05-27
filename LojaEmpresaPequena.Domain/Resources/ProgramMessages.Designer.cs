@@ -133,6 +133,15 @@ namespace LojaEmpresaPequena.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Email ou senha inválidos.
+        /// </summary>
+        public static string EmailSenha {
+            get {
+                return ResourceManager.GetString("EmailSenha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao tentar obter o Endereço!.
         /// </summary>
         public static string EnderecoAttempt {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Domain.Interfaces.Repositories
 {
-    public interface IBaseRepository<Entity> where Entity : BaseEntity<Entity>
+    public interface IBaseRepository<Entity> where Entity : class // BaseEntity<Entity>
     {
         public void  Save(Entity entidade);
 

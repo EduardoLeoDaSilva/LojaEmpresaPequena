@@ -15,10 +15,12 @@ namespace LojaEmpresaPequena.Domain.Services
     {
         private readonly IPedidoRepository _repository;
         private readonly UserManager<Usuario> _userManager;
-        public PedidoService(IPedidoRepository repository, UserManager<Usuario> userManager) :base(repository)
+        private readonly IProdutoRepository _produtoRepository;
+        public PedidoService(IPedidoRepository repository, UserManager<Usuario> userManager, IProdutoRepository produtoRepository) :base(repository)
         {
             _repository = repository;
             _userManager = userManager;
+            _produtoRepository = produtoRepository;
         }
 
 
@@ -27,17 +29,23 @@ namespace LojaEmpresaPequena.Domain.Services
             return _repository.GetCurrentPedido(usuario);
         }
     
-        public async Task<Pedido> CreatePedido(Usuario usuario)
+        public async Task<Pedido> CreatePedidoOrAddItemPedido(Usuario usuario, Produto produto)
         {
             var pedido = _repository.GetCurrentPedido(usuario);
-            if(pedido != null)
+            var produtoFromDb = await _produtoRepository.GetById(produto.Id);
+
+            if (pedido != null)
             {
+                pedido.ItemPedidos.Add(new ItemPedido(1, produtoFromDb.Preco, pedido, produtoFromDb));
+                _repository.Update(pedido);
                 return pedido;
             }
             else
             {
                 var usuarioFromDB = await _userManager.FindByNameAsync(usuario.Cpf);
-                pedido = new Pedido(DateTime.Now, null, StatusPedido.Carrinho, StatusEnvio.NaoEnviado, usuarioFromDB,null);
+                pedido = new Pedido(DateTime.Now, null, StatusPedido.Carrinho, StatusEnvio.EsperandoAprovacao, usuarioFromDB,new List<ItemPedido>());
+                pedido.ItemPedidos.Add(new ItemPedido(1, produtoFromDb.Preco, pedido, produtoFromDb));
+                _repository.Save(pedido);
                 return pedido;
             }
         }

@@ -1,11 +1,13 @@
 ﻿using LojaEmpresaPequena.Domain.Entities;
 using LojaEmpresaPequena.Domain.Entities.Api;
 using LojaEmpresaPequena.Domain.Exceptions;
+using LojaEmpresaPequena.Domain.Interfaces.Repositories;
 using LojaEmpresaPequena.Domain.Interfaces.Services;
 using LojaEmpresaPequena.Domain.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,10 +18,13 @@ namespace LojaEmpresaPequena.Domain.Services
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+        private readonly IUsuarioRepository _usuarioRepository;
+        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, RoleManager<IdentityRole> roleManager, IUsuarioRepository usuarioRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
+            _usuarioRepository = usuarioRepository;
         }
 
         public async Task<IdentityResult> CreateUser(Usuario usuario, string password)
@@ -65,9 +70,41 @@ namespace LojaEmpresaPequena.Domain.Services
             return result;
         }
 
+        public async Task<IdentityResult> Update(Usuario usuario)
+        {
+
+            VerifyDomainRules.CreateInstance()
+                        .VerifyRule(usuario == null, ProgramMessages.UsuarioNulo)
+                        .ThrowExceptionDomain();
+
+            var usuarioFromDb = await _userManager.FindByEmailAsync(usuario.Email);
+
+            VerifyDomainRules.CreateInstance()
+                       .VerifyRule(usuarioFromDb == null, ProgramMessages.UsuarioNulo);
+
+            usuarioFromDb.UpdateInstance(usuario);
+
+
+            return await _userManager.UpdateAsync(usuarioFromDb);
+
+        }
+
         public async Task SignInOut()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public  IQueryable<Usuario> GetAllUsuariosClientes()
+        {
+            var usuariosFromDb =  _usuarioRepository.GetAll();
+            return usuariosFromDb;
+
+        }
+
+        public async Task<Usuario> GetById(Guid id)
+        {
+            var usuariosFromDb = await _usuarioRepository.GetById(id);
+            return usuariosFromDb;
         }
     }
 }

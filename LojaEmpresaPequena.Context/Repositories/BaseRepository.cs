@@ -1,5 +1,6 @@
 ﻿using LojaEmpresaPequena.Domain.Entities;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Context.Repositories
 {
-    public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : BaseEntity<Entity>
+    public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : class // BaseEntity<Entity>
     {
 
         protected readonly DbSet<Entity>  _dbSet;

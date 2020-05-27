@@ -141,6 +141,9 @@
   <data name="EmailInvalido" xml:space="preserve">
     <value>Email informado inválido!</value>
   </data>
+  <data name="EmailSenha" xml:space="preserve">
+    <value>Email ou senha inválidos</value>
+  </data>
   <data name="EnderecoAttempt" xml:space="preserve">
     <value>Erro ao tentar obter o Endereço!</value>
   </data>

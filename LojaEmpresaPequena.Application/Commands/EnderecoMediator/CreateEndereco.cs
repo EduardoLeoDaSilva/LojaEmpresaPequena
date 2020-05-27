@@ -13,7 +13,7 @@ namespace LojaEmpresaPequena.Application.Commands.EnderecoMediator
 {
     public class CreateEndereco 
     {
-        public class CreadeEnderecoContract : IRequest<Result<string>> 
+        public class CreateEnderecoContract : IRequest<Result<string>> 
         {
             public string Rua { get; set; }
             public string Numero { get; set; }
@@ -25,14 +25,14 @@ namespace LojaEmpresaPequena.Application.Commands.EnderecoMediator
             public Usuario Usuario { get; set; }
         }
 
-        public class Handler : IRequestHandler<CreadeEnderecoContract, Result<string>>
+        public class Handler : IRequestHandler<CreateEnderecoContract, Result<string>>
         {
             private IEnderecoService _enderecoService;
             public Handler(IEnderecoService enderecoService)
             {
                 _enderecoService = enderecoService;
             }
-            public async Task<Result<string>> Handle(CreadeEnderecoContract request, CancellationToken cancellationToken)
+            public async Task<Result<string>> Handle(CreateEnderecoContract request, CancellationToken cancellationToken)
             {
                 var endereco = new Endereco(request.Rua, request.Numero,request.Bairro,request.Cidade, request.Estado, request.Cep, request.Complemento,request.Usuario);
 

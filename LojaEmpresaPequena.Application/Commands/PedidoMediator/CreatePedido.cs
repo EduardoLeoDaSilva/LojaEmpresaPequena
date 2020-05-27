@@ -17,7 +17,7 @@ namespace LojaEmpresaPequena.Application.Commands.PedidoMediator
         public class CreatePedidoContract : IRequest<Result<string>>
         {
             public Usuario Usuario { get; set; }
-            public List<ItemPedido> ItensPedido { get; set; }
+            public Produto Produto { get; set; }
         }
 
         public class Handler : IRequestHandler<CreatePedidoContract, Result<string>>
@@ -25,7 +25,7 @@ namespace LojaEmpresaPequena.Application.Commands.PedidoMediator
             private readonly IPedidoService _pedidoService;
             public Handler(IPedidoService pedidoService)
             {
-                pedidoService = _pedidoService;
+                _pedidoService = pedidoService;
             }
 
             public async Task<Result<string>> Handle(CreatePedidoContract request, CancellationToken cancellationToken)
@@ -34,7 +34,11 @@ namespace LojaEmpresaPequena.Application.Commands.PedidoMediator
                 if (request.Usuario == null)
                     return await Result<string>.Fail(ProgramMessages.UsuarioNulo);
 
-                var pedido = new Pedido(DateTime.Now, null, StatusPedido.Carrinho, StatusEnvio.NaoEnviado, request.Usuario, request.ItensPedido);
+                if (request.Produto == null)
+                    return await Result<string>.Fail(ProgramMessages.ProdAttempt);
+
+                var pedido = await _pedidoService.CreatePedidoOrAddItemPedido(request.Usuario,request.Produto);
+
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
 
