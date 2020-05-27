@@ -23,31 +23,31 @@ namespace LojaEmpresaPequena.Services.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody]CreatePedido.CreatePedidoContract pedido)
+        public async Task<IActionResult> Save([FromBody]CreatePedido.CreatePedidoContract contract)
         {
-            var result = await _media.Send(pedido);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllPedidos(GetAllPedidos.GetAllPedidosContract pedido)
+        public async Task<IActionResult> GetAllPedidos(GetAllPedidos.GetAllPedidosContract contract)
         {
-            var result = await _media.Send(pedido);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetPedidoById(GetAllPedidos.GetAllPedidosContract pedido)
+        public async Task<IActionResult> GetPedidoById(GetPedido.GetPedidoContract contract)
         {
-            var result = await _media.Send(pedido);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdatePedido([FromBody]UpdatePedido.UpdatePedidoContract pedido)
+        public async Task<IActionResult> UpdatePedido([FromBody]UpdatePedido.UpdatePedidoContract contract)
         {
-            var result = await _media.Send(pedido);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
     }

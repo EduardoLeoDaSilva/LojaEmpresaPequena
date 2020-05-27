@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LojaEmpresaPequena.Application.Commands.UsuarioMediator;
+using LojaEmpresaPequena.Application.Queries.UsuarioMediator;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,48 +16,40 @@ namespace LojaEmpresaPequena.Services.Controllers
     {
 
         private readonly IMediator _media;
-        public EnderecoController(IMediator media)
+        public UsuarioController(IMediator media)
         {
             _media = media;
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody]CreateEndereco.CreadeEnderecoContract endereco)
+        public async Task<IActionResult> Save([FromBody]CreateUsuarioAdmin.CreateUsuarioAdminContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEnderecos(GetAllEnderecos.GetAllEnderecosContract endereco)
+        public async Task<IActionResult> GetAllUsuarios(GetAllUsuarios.GetAllUsuariosContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetEnderecoById(GetAllEnderecos.GetAllEnderecosContract endereco)
+        public async Task<IActionResult> GetUsuarioById(GetUsuario.GetUsuarioContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateEndereco([FromBody]UpdateEndereco.UpdateEnderecoContract endereco)
+        public async Task<IActionResult> UpdateUsuario([FromBody]UpdateUsuario.UpdateUsuarioContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
-
-        [HttpDelete]
-        public async Task<IActionResult> DeleteEndereco(DeleteEndereco.DeleteEnderecoContract endereco)
-        {
-            var result = await _media.Send(endereco);
-            return Ok(result);
-        }
-
 
     }
 }

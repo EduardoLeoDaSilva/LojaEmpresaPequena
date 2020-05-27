@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LojaEmpresaPequena.Application.Commands.ProdutoMediator;
 using LojaEmpresaPequena.Application.ProdutoMediator.Commands;
+using LojaEmpresaPequena.Application.Queries.ProdutoMediator;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,31 +24,38 @@ namespace LojaEmpresaPequena.Services.Controllers
 
  
         [HttpPost]
-        public async Task<IActionResult> Save(SaveProduto.SaveProdutoContract produto)
+        public async Task<IActionResult> Save(SaveProduto.SaveProdutoContract contract)
         {
-            var result = await _media.Send(produto);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProduto(SaveProduto.SaveProdutoContract produto)
+        public async Task<IActionResult> GetProduto(GetProduto.GetProdutoContract contract)
         {
-            var result = await _media.Send(produto);
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllProdutos(GetAllProdutos.GetAllProdutosContract contract)
+        {
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduto(SaveProduto.SaveProdutoContract produto)
+        public async Task<IActionResult> UpdateProduto(UpdateProduto.UpdateProdutoContract contract)
         {
-            var result = await _media.Send(produto);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteProduto(SaveProduto.SaveProdutoContract produto)
+        public async Task<IActionResult> DeleteProduto(DeleteProduto.DeleteProdutoContract contract)
         {
-            var result = await _media.Send(produto);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
     }

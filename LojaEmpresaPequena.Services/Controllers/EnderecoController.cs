@@ -23,38 +23,38 @@ namespace LojaEmpresaPequena.Services.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody]CreateEndereco.CreateEnderecoContract endereco)
+        public async Task<IActionResult> Save([FromBody]CreateEndereco.CreateEnderecoContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEnderecos(GetAllEnderecos.GetAllEnderecosContract endereco)
+        public async Task<IActionResult> GetAllEnderecos(GetAllEnderecos.GetAllEnderecosContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetEnderecoById(GetAllEnderecos.GetAllEnderecosContract endereco)
+        public async Task<IActionResult> GetEnderecoById(GetEndereco.GetEnderecoContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateEndereco([FromBody]UpdateEndereco.UpdateEnderecoContract endereco)
+        public async Task<IActionResult> UpdateEndereco([FromBody]UpdateEndereco.UpdateEnderecoContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteEndereco(DeleteEndereco.DeleteEnderecoContract endereco)
+        public async Task<IActionResult> DeleteEndereco(DeleteEndereco.DeleteEnderecoContract contract)
         {
-            var result = await _media.Send(endereco);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 

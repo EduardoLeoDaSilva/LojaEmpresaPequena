@@ -22,38 +22,38 @@ namespace LojaEmpresaPequena.Services.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody]CreateCategoria.CreateCategoriaContract categoria)
+        public async Task<IActionResult> Save([FromBody]CreateCategoria.CreateCategoriaContract contract)
         {
-            var result = await _media.Send(categoria);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCategorias(GetAllCategorias.GetAllCategoriasContract categoria)
+        public async Task<IActionResult> GetAllCategorias(GetAllCategorias.GetAllCategoriasContract contract)
         {
-            var result = await _media.Send(categoria);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetCategoriaById(GetAllCategorias.GetAllCategoriasContract categoria)
+        public async Task<IActionResult> GetCategoriaById(GetCategoria.GetCategoriaContract contract)
         {
-            var result = await _media.Send(categoria);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCategoria([FromBody]UpdateCategoria.UpdateCategoriaContract categoria)
+        public async Task<IActionResult> UpdateCategoria([FromBody]UpdateCategoria.UpdateCategoriaContract contract)
         {
-            var result = await _media.Send(categoria);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteCategoria(DeleteCategoria.DeleteCategoriaContract categoria)
+        public async Task<IActionResult> DeleteCategoria(DeleteCategoria.DeleteCategoriaContract contract)
         {
-            var result = await _media.Send(categoria);
+            var result = await _media.Send(contract);
             return Ok(result);
         }
 
