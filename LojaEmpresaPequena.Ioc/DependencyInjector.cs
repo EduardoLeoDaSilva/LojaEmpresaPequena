@@ -23,6 +23,7 @@ namespace LojaEmpresaPequena.Ioc
             services.AddScoped<IItemPedidoRepository, ItemPedidoRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             //services
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
