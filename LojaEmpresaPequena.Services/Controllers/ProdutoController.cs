@@ -58,5 +58,12 @@ namespace LojaEmpresaPequena.Services.Controllers
             var result = await _media.Send(contract);
             return Ok(result);
         }
+
+        [HttpPost("GetLinkFoto")]
+        public async Task<IActionResult> GetLinkFoto([FromForm]GetProdutoFoto.GetProdutoFotoContract contract)
+        {
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
     }
 }

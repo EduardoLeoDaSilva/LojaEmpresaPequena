@@ -12,5 +12,6 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Services
     {
         string SaveImagem(IFormFile file, string pasta);
         Task<DroboxIntegration.DropbBoxResponseSave> SendImageToDropBox(IFormFile file, string pasta);
+        Task<DroboxIntegration.DropbBoxTemporaryLinkModel> GetTemporaryLink(string path);
     }
 }

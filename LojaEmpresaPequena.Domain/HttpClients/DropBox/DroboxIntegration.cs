@@ -70,14 +70,14 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
         }
 
 
-        public async Task<string> GetTemporaryLink(string pathArquivo)
+        public async Task<DropbBoxTemporaryLinkModel> GetTemporaryLink(string pathArquivo)
         {
-            var path = $"/dudteste/lojinha/{pathArquivo}/";
+            //var path = $"/dudteste/lojinha/{pathArquivo}/";
 
 
-            var dropBoxModel = new DropBoxBaseModel { Path = path };
+            var dropBoxModel = new DropBoxBaseModel { Path = pathArquivo };
 
-            var content = new StringContent(JsonConvert.SerializeObject(dropBoxModel).ToLower());
+            var content = new StringContent(JsonConvert.SerializeObject(dropBoxModel).ToLower(), Encoding.UTF8, "application/json");
             HttpResponseMessage message;
 
             using (var request = new HttpRequestMessage(HttpMethod.Post, "https://api.dropboxapi.com/2/files/get_temporary_link"))
@@ -87,9 +87,12 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", "Qu-u5klpwxAAAAAAAAAAlFn8Naaep2p00TcallvtGpctJVeyL549OC386GVtm6YO");
                 request.Content = content;
                 request.Content.Headers.Remove("Content-type");
+                request.Content.Headers.Add("Content-type", "application/json");
                 message = await _httpClient.SendAsync(request);
             }
-            return await message.Content.ReadAsStringAsync();
+            var responseJson = await message.Content.ReadAsStringAsync();
+            var model = JsonConvert.DeserializeObject<DropbBoxTemporaryLinkModel>(responseJson);
+            return model;
         }
 
 
@@ -160,6 +163,11 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
             public string Rev { get; set; }
             public int Size { get; set; }
             public bool Is_downloadable { get; set; }
+        }
+
+        public class DropbBoxTemporaryLinkModel
+        {
+            public string Link { get; set; }
         }
     }
 }

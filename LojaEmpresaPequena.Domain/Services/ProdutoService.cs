@@ -31,5 +31,11 @@ namespace LojaEmpresaPequena.Domain.Services
             return await sender.SendImage(file, pasta);
         }
 
+        public async Task<DroboxIntegration.DropbBoxTemporaryLinkModel> GetTemporaryLink(string path)
+        {
+            var sender = new DroboxIntegration();
+            return await sender.GetTemporaryLink(path);
+        }
+
     }
 }
