@@ -27,7 +27,7 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
         public class ProdutosResponse 
         {
             public IList<Produto> Produtos { get; set; }
-            public int RowCount { get; set; }
+            public int ItemsCount { get; set; }
         }
 
 
@@ -58,7 +58,7 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
                      new ProdutosResponse()
                      {
                          Produtos = pagedList.ToList(),
-                         RowCount = pagedList.PageCount
+                         ItemsCount = pagedList.TotalItemCount
                      }
                     );
 

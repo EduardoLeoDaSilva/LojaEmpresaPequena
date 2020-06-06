@@ -33,8 +33,9 @@ namespace LojaEmpresaPequena.Services
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => {
-            options.EnableEndpointRouting = false;
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
             });
 
 
@@ -43,6 +44,9 @@ namespace LojaEmpresaPequena.Services
             services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentity>();
 
 
+            //services.AddControllers().AddNewtonsoftJson(options =>
+            //options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //);
 
             DependencyInjector.Inject(services);
 
@@ -73,6 +77,8 @@ namespace LojaEmpresaPequena.Services
                 options.User.RequireUniqueEmail = true;
             });
 
+            services.AddCors(x => x.AddPolicy("teste", t => { t.AllowAnyOrigin(); t.AllowAnyHeader(); t.AllowAnyHeader(); t.AllowAnyMethod(); }));
+
             services.AddSession();
             services.AddDistributedMemoryCache();
 
@@ -95,7 +101,7 @@ namespace LojaEmpresaPequena.Services
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-
+            app.UseCors("teste");
             app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {

@@ -3,12 +3,14 @@ using LojaEmpresaPequena.Domain.Resources;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
    public class Categoria : BaseEntity<Categoria>
     {
         public string Nome { get; set; }
+
         public List<ProdutoCategoria> ProdutoCategorias { get; set; }
 
         public Categoria()

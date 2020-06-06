@@ -29,14 +29,21 @@ namespace LojaEmpresaPequena.Services.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCategorias(GetAllCategorias.GetAllCategoriasContract contract)
+        public async Task<IActionResult> GetAllCategorias([FromQuery] GetAllCategorias.GetAllCategoriasContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
         }
 
-        [HttpGet("id")]
-        public async Task<IActionResult> GetCategoriaById(GetCategoria.GetCategoriaContract contract)
+        [HttpGet("lista")]
+        public async Task<IActionResult> GetAllCategoriasList([FromQuery] GetAllCategoriasList.GetAllCategoriasListContract contract)
+        {
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategoriaById([FromRoute] GetCategoria.GetCategoriaContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
@@ -50,8 +57,8 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteCategoria(DeleteCategoria.DeleteCategoriaContract contract)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategoria([FromRoute]DeleteCategoria.DeleteCategoriaContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);

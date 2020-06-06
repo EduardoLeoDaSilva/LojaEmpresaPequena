@@ -38,7 +38,7 @@ namespace LojaEmpresaPequena.Application.Commands.PedidoMediator
 
                 pedidoFromDb.UpdateInstance(request.Pedido);
 
-                _pedidoService.Update(pedidoFromDb);
+               await _pedidoService.Update(pedidoFromDb);
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
             }

@@ -23,9 +23,9 @@ namespace LojaEmpresaPequena.Context
             
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
                 base.OnModelCreating(builder);
-            this.Roles.Add(new IdentityRole("Admin"));
-            this.Roles.Add(new IdentityRole("Cliente"));
-            this.SaveChanges();
+            //this.Roles.Add(new IdentityRole("Admin"));
+            //this.Roles.Add(new IdentityRole("Cliente"));
+            //this.SaveChanges();
         }
 
 

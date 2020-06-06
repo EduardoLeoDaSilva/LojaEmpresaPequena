@@ -30,7 +30,7 @@ namespace LojaEmpresaPequena.Application.Commands.CategoriaMediator
                 if (request.Id == null)
                     return await Result<string>.Fail(ProgramMessages.IdErro);
 
-                _categoriaService.Delete(request.Id);
+               await  _categoriaService.Delete(request.Id);
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
 

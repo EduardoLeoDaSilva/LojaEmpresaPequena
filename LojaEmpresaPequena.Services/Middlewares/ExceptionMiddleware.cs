@@ -46,6 +46,11 @@ namespace LojaEmpresaPequena.Services.Middlewares
                 var dominioException = (DominioException)ex.InnerException;
                 var result = await Result<string>.Fail(dominioException.Errors.ToArray());
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(new { data = result.Data, success = result.Success, errors = result.Errors }));
+            }else if(ex is DominioException)
+            {
+                var dominioException = (DominioException)ex;
+                var result = await Result<string>.Fail(dominioException.Errors.ToArray());
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(new { data = result.Data, success = result.Success, errors = result.Errors }));
             }
             else
             {

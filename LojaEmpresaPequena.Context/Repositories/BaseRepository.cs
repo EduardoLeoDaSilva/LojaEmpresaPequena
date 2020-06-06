@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Context.Repositories
 {
-    public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : class // BaseEntity<Entity>
+    public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity :  BaseEntity<Entity>
     {
 
         protected readonly DbSet<Entity>  _dbSet;
@@ -23,9 +23,10 @@ namespace LojaEmpresaPequena.Context.Repositories
             _dbSet = context.Set<Entity>();
         }
 
-        public async virtual void Delete(Guid id)
+        public async virtual Task Delete(Guid id)
         {
             var entityFromDb = await _dbSet.FindAsync(id);
+            _dbSet.Remove(entityFromDb);
             _context.SaveChanges();
         }
 
@@ -41,13 +42,13 @@ namespace LojaEmpresaPequena.Context.Repositories
             return entityFromDb;
         }
 
-        public async virtual void Save(Entity entidade)
+        public async virtual Task Save(Entity entidade)
         {
             _dbSet.Add(entidade);
            await _context.SaveChangesAsync();
         }
 
-        public async virtual void Update(Entity entidade)
+        public async virtual Task Update(Entity entidade)
         {
             _dbSet.Update(entidade);
            await _context.SaveChangesAsync();

@@ -27,7 +27,7 @@ namespace LojaEmpresaPequena.Application.Queries.CategoriaMediator
         public class CategoriasResponse
         {
             public List<Categoria> Categorias { get; set; }
-            public int RowCount { get; set; }
+            public int ItemsCount { get; set; }
         }
 
         public class Handler : IRequestHandler<GetAllCategoriasContract, Result<CategoriasResponse>>
@@ -42,18 +42,17 @@ namespace LojaEmpresaPequena.Application.Queries.CategoriaMediator
 
                 var listFromDb = _categoriaService.GetAll();
 
-                if (!String.IsNullOrEmpty(request.NomeFilter) || !String.IsNullOrWhiteSpace(request.NomeFilter))
+                if (String.IsNullOrEmpty(request.NomeFilter) == false && String.IsNullOrWhiteSpace(request.NomeFilter) == false)
                 {
                     listFromDb = listFromDb.Where(x => x.Nome.Contains(request.NomeFilter));
                 }
-
                 var pagedList = listFromDb.ToPagedList(request.Page, request.PageSize);
 
                 return await Result<CategoriasResponse>.Ok(new CategoriasResponse()
                 {
-                 Categorias = pagedList.ToList(),
-                 RowCount = pagedList.PageCount
-                });;
+                    Categorias = pagedList.ToList(),
+                    ItemsCount = pagedList.TotalItemCount
+                }); ;
 
 
             }

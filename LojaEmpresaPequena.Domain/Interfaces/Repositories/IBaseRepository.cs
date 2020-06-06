@@ -9,14 +9,14 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Repositories
 {
     public interface IBaseRepository<Entity> where Entity : class // BaseEntity<Entity>
     {
-        public void  Save(Entity entidade);
+        public Task Save(Entity entidade);
 
-        public void Delete(Guid id);
+        public Task Delete(Guid id);
 
         public IQueryable<Entity> GetAll();
 
         public Task<Entity> GetById(Guid id);
 
-        public void Update(Entity entidade);
+        public Task Update(Entity entidade);
     }
 }

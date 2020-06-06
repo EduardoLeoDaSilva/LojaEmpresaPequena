@@ -30,7 +30,7 @@ namespace LojaEmpresaPequena.Application.Commands.CategoriaMediator
             {
                 var categoria = new Categoria(request.Nome);
 
-                _categoriaService.Save(categoria);
+                await _categoriaService.Save(categoria);
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
 

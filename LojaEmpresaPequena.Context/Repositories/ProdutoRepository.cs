@@ -1,8 +1,11 @@
 ﻿using LojaEmpresaPequena.Domain.Entities;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Context.Repositories
 {
@@ -10,7 +13,12 @@ namespace LojaEmpresaPequena.Context.Repositories
     {
         public ProdutoRepository(LojaEmpresaPequenaIdentity context) :base (context)
         {
+            
+        }
 
+        public async override Task<Produto> GetById(Guid id)
+        {
+            return await _dbSet.Where(x => x.Id == id).Include(x => x.ProdutoCategorias).ThenInclude(x => x.Categoria).SingleOrDefaultAsync();
         }
     }
 }

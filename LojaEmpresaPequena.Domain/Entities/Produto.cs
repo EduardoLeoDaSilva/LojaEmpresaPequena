@@ -3,6 +3,7 @@ using LojaEmpresaPequena.Domain.Resources;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
@@ -11,7 +12,8 @@ namespace LojaEmpresaPequena.Domain.Entities
         public string Nome { get; set; }
         public string Marca { get; set; }
         public  double Preco { get; set; }
-        public int QuantidadeEstoque { get; set; }
+        public int Quantidade { get; set; }
+
         public List<ProdutoCategoria> ProdutoCategorias { get; set; }
 
         public string FotoUrl { get; set; }
@@ -20,7 +22,7 @@ namespace LojaEmpresaPequena.Domain.Entities
         {
 
         }
-        public Produto(string nome, string marca, double preco, int quantidadeEstoque)
+        public Produto(string nome, string marca, double preco, int quantidade)
         {
 
             VerifyDomainRules.CreateInstance()
@@ -31,7 +33,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             Nome = nome;
             Marca = marca;
             Preco = preco;
-            QuantidadeEstoque = quantidadeEstoque;
+            Quantidade = quantidade;
         }
 
         public override void UpdateInstance(Produto e)
@@ -44,7 +46,8 @@ namespace LojaEmpresaPequena.Domain.Entities
             Nome = e.Nome;
             Marca = e.Marca;
             Preco = e.Preco;
-            QuantidadeEstoque = e.QuantidadeEstoque;
+            Quantidade = e.Quantidade;
+            ProdutoCategorias = e.ProdutoCategorias;
             FotoUrl = e.FotoUrl;
         }
 

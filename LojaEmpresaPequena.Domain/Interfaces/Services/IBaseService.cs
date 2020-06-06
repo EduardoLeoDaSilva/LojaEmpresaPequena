@@ -10,9 +10,9 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Services
     public interface IBaseService<Entity> where Entity : BaseEntity<Entity>
     {
 
-        public void Save(Entity entity);
-        public void Delete(Guid id);
-        public void Update(Entity entity);
+        public  Task Save(Entity entity);
+        public Task Delete(Guid id);
+        public Task Update(Entity entity);
         public IQueryable<Entity> GetAll();
         public Task<Entity> GetById(Guid id);
 

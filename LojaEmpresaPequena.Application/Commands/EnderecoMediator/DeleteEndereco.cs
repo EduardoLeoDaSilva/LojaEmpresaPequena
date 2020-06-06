@@ -32,7 +32,7 @@ namespace LojaEmpresaPequena.Application.Commands.EnderecoMediator
                 if (request.Id == null)
                     return await Result<string>.Fail(ProgramMessages.IdErro);
 
-                _enderecoService.Delete(request.Id);
+                await _enderecoService.Delete(request.Id);
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
             }

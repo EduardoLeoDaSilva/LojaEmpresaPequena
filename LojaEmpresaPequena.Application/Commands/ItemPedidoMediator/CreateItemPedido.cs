@@ -50,7 +50,7 @@ namespace LojaEmpresaPequena.Application.Commands.ItemPedidoMediator
 
                 var itemPedido = new ItemPedido(request.Quantidade, request.Preco, currentPedido, produtoFromDb);
 
-                _itemPedidoService.Save(itemPedido);
+                await _itemPedidoService.Save(itemPedido);
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
 

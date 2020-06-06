@@ -17,19 +17,19 @@ namespace LojaEmpresaPequena.Domain.Services
             _repository = repository;
         }
 
-        public  virtual void Save(Entity entity)
+        public async virtual Task Save(Entity entity)
         {
-            _repository.Save(entity);
+            await _repository.Save(entity);
         }
 
-        public virtual void Delete(Guid id)
+        public async virtual Task Delete(Guid id)
         {
-            _repository.Delete(id);
+            await _repository.Delete(id);
         }
 
-        public virtual void Update(Entity entity)
+        public async virtual Task Update(Entity entity)
         {
-            _repository.Update(entity);
+            await _repository.Update(entity);
         }
 
         public virtual IQueryable<Entity> GetAll() 

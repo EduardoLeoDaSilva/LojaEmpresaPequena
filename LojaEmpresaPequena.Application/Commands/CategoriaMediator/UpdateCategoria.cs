@@ -33,10 +33,16 @@ namespace LojaEmpresaPequena.Application.Commands.CategoriaMediator
 
                 var categoriaFromDb = await _categoriaService.GetById(request.Id);
 
-                if(categoriaFromDb == null)
-                    return await Result<string>.Fail(ProgramMessages.Falha);
 
-                _categoriaService.Update(categoriaFromDb);
+                if(String.IsNullOrEmpty(request.Nome) || string.IsNullOrWhiteSpace(request.Nome))
+                    await Result<string>.FailToMiddleware(ProgramMessages.NomeInvalido);
+
+                categoriaFromDb.Nome = request.Nome;
+
+                if(categoriaFromDb == null)
+                    await  Result<string>.FailToMiddleware(ProgramMessages.Falha);
+
+                await _categoriaService.Update(categoriaFromDb);
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
             }

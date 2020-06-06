@@ -35,6 +35,7 @@ namespace LojaEmpresaPequena.Application.Commands.EnderecoMediator
             public async Task<Result<string>> Handle(CreateEnderecoContract request, CancellationToken cancellationToken)
             {
                 var endereco = new Endereco(request.Rua, request.Numero,request.Bairro,request.Cidade, request.Estado, request.Cep, request.Complemento,request.Usuario);
+                await _enderecoService.Save(endereco);
 
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
 

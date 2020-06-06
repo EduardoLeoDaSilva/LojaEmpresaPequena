@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LojaEmpresaPequena.Domain.Exceptions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,6 +31,11 @@ namespace LojaEmpresaPequena.Domain.Entities.Api
         {
             var result = new Result<Entity>(false, erros);
             return Task.FromResult(result);
+        }
+
+        public static Task FailToMiddleware(params string[] erros)
+        {
+            throw new DominioException(erros.ToList());
         }
 
 

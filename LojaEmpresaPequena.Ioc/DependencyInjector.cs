@@ -17,24 +17,24 @@ namespace LojaEmpresaPequena.Ioc
         {
             //repositories
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-            services.AddScoped<IDetalhesPedidoRepository, DetalhesPedidoRepository>();
-            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-            services.AddScoped<IItemPedidoRepository, ItemPedidoRepository>();
-            services.AddScoped<IPedidoRepository, PedidoRepository>();
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+            services.AddTransient<IDetalhesPedidoRepository, DetalhesPedidoRepository>();
+            services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+            services.AddTransient<IItemPedidoRepository, ItemPedidoRepository>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
             //services
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-            services.AddScoped<ICategoriaService, CategoriaService>();
-            services.AddScoped<IDetalhesPedidoService, DetalhesPedidoService>();
-            services.AddScoped<IEnderecoService, EnderecoService>();
-            services.AddScoped<IItemPedidoService, ItemPedidoService>();
-            services.AddScoped<IPedidoService, PedidoService>();
-            services.AddScoped<IProdutoService, ProdutoService>();
-            services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<IEmailService, EmailService>();
+            services.AddTransient<ICategoriaService, CategoriaService>();
+            services.AddTransient<IDetalhesPedidoService, DetalhesPedidoService>();
+            services.AddTransient<IEnderecoService, EnderecoService>();
+            services.AddTransient<IItemPedidoService, ItemPedidoService>();
+            services.AddTransient<IPedidoService, PedidoService>();
+            services.AddTransient<IProdutoService, ProdutoService>();
+            services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<IEmailService, EmailService>();
         }
     }
 }

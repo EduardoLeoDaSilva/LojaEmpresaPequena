@@ -37,7 +37,7 @@ namespace LojaEmpresaPequena.Domain.Services
             if (pedido != null)
             {
                 pedido.ItemPedidos.Add(new ItemPedido(1, produtoFromDb.Preco, pedido, produtoFromDb));
-                _repository.Update(pedido);
+                await _repository.Update(pedido);
                 return pedido;
             }
             else
@@ -45,7 +45,7 @@ namespace LojaEmpresaPequena.Domain.Services
                 var usuarioFromDB = await _userManager.FindByNameAsync(usuario.Cpf);
                 pedido = new Pedido(DateTime.Now, null, StatusPedido.Carrinho, StatusEnvio.EsperandoAprovacao, usuarioFromDB,new List<ItemPedido>());
                 pedido.ItemPedidos.Add(new ItemPedido(1, produtoFromDb.Preco, pedido, produtoFromDb));
-                _repository.Save(pedido);
+                await _repository.Save(pedido);
                 return pedido;
             }
         }

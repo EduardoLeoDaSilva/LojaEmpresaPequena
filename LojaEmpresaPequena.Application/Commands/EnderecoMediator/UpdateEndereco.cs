@@ -45,6 +45,8 @@ namespace LojaEmpresaPequena.Application.Commands.EnderecoMediator
 
                 enderecoFromDb.UpdateInstance(new Endereco(request.Rua, request.Numero, request.Bairro, request.Cidade, request.Estado, request.Cep, request.Complemento, request.Usuario));
 
+                await _enderecoSevice.Update(enderecoFromDb);
+
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
 
             }

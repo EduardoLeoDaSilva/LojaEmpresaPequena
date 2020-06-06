@@ -30,15 +30,15 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetProduto(GetProduto.GetProdutoContract contract)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduto([FromRoute]GetProduto.GetProdutoContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProdutos(GetAllProdutos.GetAllProdutosContract contract)
+        public async Task<IActionResult> GetAllProdutos([FromQuery]GetAllProdutos.GetAllProdutosContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
@@ -46,7 +46,7 @@ namespace LojaEmpresaPequena.Services.Controllers
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduto(UpdateProduto.UpdateProdutoContract contract)
+        public async Task<IActionResult> UpdateProduto([FromForm]UpdateProduto.UpdateProdutoContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
