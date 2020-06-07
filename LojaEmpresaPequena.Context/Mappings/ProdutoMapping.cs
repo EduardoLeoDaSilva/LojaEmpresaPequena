@@ -12,6 +12,7 @@ namespace LojaEmpresaPequena.Context.Mappings
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.HasMany(x => x.Fotos).WithOne(x => x.Produto).OnDelete(DeleteBehavior.Cascade);
             //fazer rel npn com categorias
         }
     }

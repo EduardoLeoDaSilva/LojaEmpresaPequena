@@ -11,7 +11,8 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Services
     public interface IProdutoService : IBaseService<Produto>
     {
         string SaveImagem(IFormFile file, string pasta);
-        Task<DroboxIntegration.DropbBoxResponseSave> SendImageToDropBox(IFormFile file, string pasta);
-        Task<DroboxIntegration.DropbBoxTemporaryLinkModel> GetTemporaryLink(string path);
+        Task<DropbBoxResponseSave> SendImageToDropBox(IFormFile file, string pasta);
+        Task<DropBoxResponseSharedAndTemporaryLink> GetTemporaryLink(string path);
+        Task<DropBoxResponseSharedAndTemporaryLink> GetSharedLink(string path);
     }
 }

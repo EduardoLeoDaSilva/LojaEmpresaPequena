@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LojaEmpresaPequena.Context.Migrations
 {
-    [DbContext(typeof(LojaEmpresaPequenaIdentity))]
+    [DbContext(typeof(LojaEmpresaPequenaIdentityContext))]
     [Migration("20200604034140_NovaPropriedades")]
     partial class NovaPropriedades
     {

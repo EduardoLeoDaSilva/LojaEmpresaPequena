@@ -3,14 +3,16 @@ using System;
 using LojaEmpresaPequena.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LojaEmpresaPequena.Context.Migrations
 {
     [DbContext(typeof(LojaEmpresaPequenaIdentityContext))]
-    partial class LojaEmpresaPequenaIdentityModelSnapshot : ModelSnapshot
+    [Migration("20200607010625_ClassFoto")]
+    partial class ClassFoto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -429,8 +431,7 @@ namespace LojaEmpresaPequena.Context.Migrations
                 {
                     b.HasOne("LojaEmpresaPequena.Domain.Entities.Produto", "Produto")
                         .WithMany("Fotos")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProdutoId");
                 });
 
             modelBuilder.Entity("LojaEmpresaPequena.Domain.Entities.ItemPedido", b =>

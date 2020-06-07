@@ -31,7 +31,13 @@ namespace LojaEmpresaPequena.Domain.Services
         {
             //validacao
             VerifyDomainRules.CreateInstance().VerifyRule(String.IsNullOrEmpty(password) || String.IsNullOrWhiteSpace(password), ProgramMessages.SenhaInvalida).ThrowExceptionDomain();
-            var role = _roleManager.FindByNameAsync("Cliente");
+
+            var role = await _roleManager.FindByNameAsync("Cliente");
+            if(role == null)
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Cliente"));
+            }
+            
             var result = await _userManager.CreateAsync(usuario, password);
             return result;
 
@@ -41,7 +47,11 @@ namespace LojaEmpresaPequena.Domain.Services
         {
             //validacao
             VerifyDomainRules.CreateInstance().VerifyRule(String.IsNullOrEmpty(password) || String.IsNullOrWhiteSpace(password), ProgramMessages.SenhaInvalida).ThrowExceptionDomain();
-            var role = _roleManager.FindByNameAsync("Admin");
+            var role = await _roleManager.FindByNameAsync("Admin");
+            if (role == null)
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
             var result = await _userManager.CreateAsync(usuario, password);
             return result;
 

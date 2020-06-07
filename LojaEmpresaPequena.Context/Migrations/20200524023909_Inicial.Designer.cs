@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LojaEmpresaPequena.Context.Migrations
 {
-    [DbContext(typeof(LojaEmpresaPequenaIdentity))]
+    [DbContext(typeof(LojaEmpresaPequenaIdentityContext))]
     [Migration("20200524023909_Inicial")]
     partial class Inicial
     {

@@ -52,15 +52,15 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteProduto(DeleteProduto.DeleteProdutoContract contract)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduto([FromRoute]DeleteProduto.DeleteProdutoContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
         }
 
         [HttpPost("GetLinkFoto")]
-        public async Task<IActionResult> GetLinkFoto([FromForm]GetProdutoFoto.GetProdutoFotoContract contract)
+        public async Task<IActionResult> GetLinkFoto([FromForm]GetProdutoFotos.GetProdutoFotoContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);

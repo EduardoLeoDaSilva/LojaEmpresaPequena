@@ -31,8 +31,6 @@ namespace LojaEmpresaPequena.Domain.Utils
         public byte[] GetBytesFromImage(IFormFile file)
         {
             var photoName = file.FileName;
-
-
             byte[] imagem;
             using (var stream = file.OpenReadStream())
             using (var ms = new MemoryStream())

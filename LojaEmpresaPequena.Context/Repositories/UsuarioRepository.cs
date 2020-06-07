@@ -11,7 +11,7 @@ namespace LojaEmpresaPequena.Context.Repositories
     public class UsuarioRepository :  IUsuarioRepository
     {
 
-        public UsuarioRepository(LojaEmpresaPequenaIdentity context)
+        public UsuarioRepository(LojaEmpresaPequenaIdentityContext context)
         {
 
         }

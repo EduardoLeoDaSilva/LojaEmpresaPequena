@@ -16,7 +16,7 @@ namespace LojaEmpresaPequena.Domain.Entities
 
         public List<ProdutoCategoria> ProdutoCategorias { get; set; }
 
-        public string FotoUrl { get; set; }
+        public List<Foto> Fotos { get; set; }
 
         public Produto()
         {
@@ -48,7 +48,7 @@ namespace LojaEmpresaPequena.Domain.Entities
             Preco = e.Preco;
             Quantidade = e.Quantidade;
             ProdutoCategorias = e.ProdutoCategorias;
-            FotoUrl = e.FotoUrl;
+            Fotos = e.Fotos;
         }
 
 

@@ -12,7 +12,7 @@ namespace LojaEmpresaPequena.Context.Repositories
     public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository
     {
         
-        public CategoriaRepository(LojaEmpresaPequenaIdentity _context) :base(_context)
+        public CategoriaRepository(LojaEmpresaPequenaIdentityContext _context) :base(_context)
         {
 
         }

@@ -8,7 +8,7 @@ namespace LojaEmpresaPequena.Context.Repositories
 {
     public class EnderecoRepository : BaseRepository<Endereco>, IEnderecoRepository
     {
-        public EnderecoRepository(LojaEmpresaPequenaIdentity context) : base(context)
+        public EnderecoRepository(LojaEmpresaPequenaIdentityContext context) : base(context)
         {
 
         }

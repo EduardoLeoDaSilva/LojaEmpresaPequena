@@ -10,19 +10,21 @@ using System.Text;
 namespace LojaEmpresaPequena.Context
 {
 
-        public class LojaEmpresaPequenaIdentity : IdentityDbContext<Usuario>
+    public class LojaEmpresaPequenaIdentityContext : IdentityDbContext<Usuario>
+    {
+
+
+        public LojaEmpresaPequenaIdentityContext(DbContextOptions options) : base(options)
+        {
+            this.Database.EnsureCreated();
+            
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
         {
 
-
-            public LojaEmpresaPequenaIdentity(DbContextOptions options) : base(options)
-            {
-            this.Database.EnsureCreated();
-        }
-            protected override void OnModelCreating(ModelBuilder builder)
-            {
-            
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-                base.OnModelCreating(builder);
+
+            base.OnModelCreating(builder);
             //this.Roles.Add(new IdentityRole("Admin"));
             //this.Roles.Add(new IdentityRole("Cliente"));
             //this.SaveChanges();
@@ -30,5 +32,5 @@ namespace LojaEmpresaPequena.Context
 
 
     }
-    
+
 }

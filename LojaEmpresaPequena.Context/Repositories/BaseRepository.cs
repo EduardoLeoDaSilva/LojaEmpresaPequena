@@ -14,10 +14,10 @@ namespace LojaEmpresaPequena.Context.Repositories
     {
 
         protected readonly DbSet<Entity>  _dbSet;
-        protected readonly LojaEmpresaPequenaIdentity _context;
+        protected readonly LojaEmpresaPequenaIdentityContext _context;
 
 
-        public BaseRepository(LojaEmpresaPequenaIdentity context)
+        public BaseRepository(LojaEmpresaPequenaIdentityContext context)
         {
             _context = context;
             _dbSet = context.Set<Entity>();
@@ -25,7 +25,7 @@ namespace LojaEmpresaPequena.Context.Repositories
 
         public async virtual Task Delete(Guid id)
         {
-            var entityFromDb = await _dbSet.FindAsync(id);
+            var entityFromDb = await _dbSet.Where(x => x.Id == id).SingleOrDefaultAsync();
             _dbSet.Remove(entityFromDb);
             _context.SaveChanges();
         }

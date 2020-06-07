@@ -40,8 +40,8 @@ namespace LojaEmpresaPequena.Services
 
 
             //Ef e Identity
-            services.AddDbContext<LojaEmpresaPequenaIdentity>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
-            services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentity>();
+            services.AddDbContext<LojaEmpresaPequenaIdentityContext>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
+            services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentityContext>();
 
 
             //services.AddControllers().AddNewtonsoftJson(options =>

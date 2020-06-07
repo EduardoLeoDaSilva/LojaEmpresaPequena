@@ -4,6 +4,7 @@ using LojaEmpresaPequena.Domain.Interfaces.Services;
 using LojaEmpresaPequena.Domain.Resources;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace LojaEmpresaPequena.Application.ProdutoMediator.Commands
 {
     public class SaveProduto
     {
-        public class SaveProdutoContract: IRequest<Result<string>>
+        public class SaveProdutoContract : IRequest<Result<string>>
         {
             public string Nome { get; set; }
             public string Marca { get; set; }
@@ -23,7 +24,9 @@ namespace LojaEmpresaPequena.Application.ProdutoMediator.Commands
 
             public IFormFile Foto { get; set; }
 
-            public List<Categoria> ProdutoCategorias { get; set; }
+            public List<Foto> Fotos { get; set; }
+
+            public List<Categoria> Categorias { get; set; }
 
         }
 
@@ -42,16 +45,15 @@ namespace LojaEmpresaPequena.Application.ProdutoMediator.Commands
                 var produto = new Produto(request.Nome, request.Marca, request.Preco, request.Quantidade);
                 var produtoCategoria = new List<ProdutoCategoria>();
 
-
-                foreach (var categoria in request.ProdutoCategorias)
+                foreach (var categoria in request.Categorias)
                 {
                     produtoCategoria.Add(new ProdutoCategoria { CategoriaId = categoria.Id, Categoria = categoria, Produto = produto, ProdutoId = produto.Id });
                 }
                 produto.ProdutoCategorias = produtoCategoria;
+
+                produto.Fotos = request.Fotos;
+
                 await _produtoService.Update(produto);
-
-                _produtoService.SaveImagem(request.Foto, $"produtos\\{produto.Id}");
-
 
                 return await Result<string>.Ok(ProgramMessages.CadastroProdSucesso);
             }

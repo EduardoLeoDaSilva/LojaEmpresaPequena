@@ -70,7 +70,7 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
         }
 
 
-        public async Task<DropbBoxTemporaryLinkModel> GetTemporaryLink(string pathArquivo)
+        public async Task<DropBoxResponseSharedAndTemporaryLink> GetTemporaryLink(string pathArquivo)
         {
             //var path = $"/dudteste/lojinha/{pathArquivo}/";
 
@@ -91,7 +91,34 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
                 message = await _httpClient.SendAsync(request);
             }
             var responseJson = await message.Content.ReadAsStringAsync();
-            var model = JsonConvert.DeserializeObject<DropbBoxTemporaryLinkModel>(responseJson);
+            var model = JsonConvert.DeserializeObject<DropBoxResponseSharedAndTemporaryLink>(responseJson);
+            return model;
+        }
+
+        public async Task<DropBoxResponseSharedAndTemporaryLink> GetSharedLink(string pathArquivo)
+        {
+            //var path = $"/dudteste/lojinha/{pathArquivo}/";
+
+
+            var dropBoxModel = new DropBoxRequestSharedLinkModel { Path = pathArquivo };
+
+            var content = new StringContent(JsonConvert.SerializeObject(dropBoxModel).ToLower(), Encoding.UTF8, "application/json");
+            HttpResponseMessage message;
+
+            using (var request = new HttpRequestMessage(HttpMethod.Post, "https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings"))
+            using (var _httpClient = new HttpClient())
+            {
+                // request.Headers.Clear();
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", "Qu-u5klpwxAAAAAAAAAAlFn8Naaep2p00TcallvtGpctJVeyL549OC386GVtm6YO");
+                request.Content = content;
+                request.Content.Headers.Remove("Content-type");
+                request.Content.Headers.Add("Content-type", "application/json");
+                message = await _httpClient.SendAsync(request);
+            }
+            var responseJson = await message.Content.ReadAsStringAsync();
+            var model = JsonConvert.DeserializeObject<DropBoxResponseSharedAndTemporaryLink>(responseJson);
+            if(model == null) { 
+            }
             return model;
         }
 
@@ -140,34 +167,71 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
             return await message.Content.ReadAsStringAsync();
         }
 
-        public class DropBoxUploadModel : DropBoxBaseModel
-        {
-            public string Mode { get; set; }
-            public bool AutoRename { get; set; }
-            public bool Mute { get; set; }
-            public bool Strict_Conflict { get; set; }
-        }
+      
+    }
 
-        public class DropBoxBaseModel
-        {
-            public string Path { get; set; }
 
-        }
 
-        public class DropbBoxResponseSave
-        {
-            public string Name { get; set; }
-            public string Path_lower { get; set; }
-            public string Path_display { get; set; }
-            public string Id { get; set; }
-            public string Rev { get; set; }
-            public int Size { get; set; }
-            public bool Is_downloadable { get; set; }
-        }
+    public class DropBoxUploadModel : DropBoxBaseModel
+    {
+        public string Mode { get; set; }
+        public bool AutoRename { get; set; }
+        public bool Mute { get; set; }
+        public bool Strict_Conflict { get; set; }
+    }
 
-        public class DropbBoxTemporaryLinkModel
-        {
-            public string Link { get; set; }
-        }
+    public class DropBoxBaseModel
+    {
+        public string Path { get; set; }
+
+    }
+
+    public class DropbBoxResponseSave
+    {
+        public string Name { get; set; }
+        public string Path_lower { get; set; }
+        public string Path_display { get; set; }
+        public string Id { get; set; }
+        public string Rev { get; set; }
+        public int Size { get; set; }
+        public bool Is_downloadable { get; set; }
+    }
+
+    public class DropBoxResponseSharedAndTemporaryLink
+    {
+        public string Link { get; set; }
+        public string Url { get; set; }
+        public Error Error { get; set; }
+    }
+
+    public class DropBoxRequestSharedLinkModel
+    {
+        public string Path { get; set; }
+        public SettingSharedLinkModel Settings { get; }
+    }
+
+    public class SettingSharedLinkModel
+    {
+        public string Requested_visibility { get; } = "public";
+        public string Audience { get; } = "public";
+        public string Access { get; } = "viewer";
+
+
+    }
+
+
+    public class Error
+    {
+        public SharedeLinkError Shared_link_already_exists { get; set; }
+    }
+
+    public class SharedeLinkError
+    {
+        public MetaData MetaData { get; set; }
+    }
+
+    public class MetaData
+    {
+        public string Url { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace LojaEmpresaPequena.Context.Repositories
 {
     public class ItemPedidoRepository : BaseRepository<ItemPedido>, IItemPedidoRepository
     {
-        public ItemPedidoRepository(LojaEmpresaPequenaIdentity context) : base(context)
+        public ItemPedidoRepository(LojaEmpresaPequenaIdentityContext context) : base(context)
         {
 
         }

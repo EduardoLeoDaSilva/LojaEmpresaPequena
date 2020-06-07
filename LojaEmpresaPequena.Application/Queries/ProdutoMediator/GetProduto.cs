@@ -29,6 +29,7 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
             public double Preco { get; set; }
             public int Quantidade { get; set; }
             public List<Categoria> Categorias { get; set; }
+            public List<Foto> Fotos { get; set; }
         }
 
 
@@ -52,7 +53,8 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
                 prodResponse.Nome = prodFromDb.Nome;
                 prodResponse.Preco = prodFromDb.Preco;
                 prodResponse.Quantidade = prodFromDb.Quantidade;
-                prodFromDb.FotoUrl = prodFromDb.FotoUrl;
+                prodResponse.Fotos = prodFromDb.Fotos;
+
 
                 if (prodFromDb != null)
                 {
