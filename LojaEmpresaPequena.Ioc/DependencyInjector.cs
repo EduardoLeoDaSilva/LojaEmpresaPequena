@@ -2,8 +2,10 @@
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
 using LojaEmpresaPequena.Domain.Interfaces.Services;
 using LojaEmpresaPequena.Domain.Interfaces.Services.Email;
+using LojaEmpresaPequena.Domain.Interfaces.Services.Jwt;
 using LojaEmpresaPequena.Domain.Services;
 using LojaEmpresaPequena.Domain.Services.Email;
+using LojaEmpresaPequena.Domain.Services.Jwt;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,7 @@ namespace LojaEmpresaPequena.Ioc
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IJwtService, JwtService>();
         }
     }
 }

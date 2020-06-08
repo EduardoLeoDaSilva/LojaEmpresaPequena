@@ -37,8 +37,13 @@ namespace LojaEmpresaPequena.Domain.Services
             {
                 await _roleManager.CreateAsync(new IdentityRole("Cliente"));
             }
-            
+            usuario.UserName = usuario.Email;
             var result = await _userManager.CreateAsync(usuario, password);
+
+
+            if (result.Succeeded)
+                await _userManager.AddToRoleAsync(usuario, "Cliente");
+
             return result;
 
         }
@@ -52,7 +57,12 @@ namespace LojaEmpresaPequena.Domain.Services
             {
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
             }
+            usuario.UserName = usuario.Email;
             var result = await _userManager.CreateAsync(usuario, password);
+
+            if (result.Succeeded)
+                await _userManager.AddToRoleAsync(usuario, "Admin");
+            
             return result;
 
         }
