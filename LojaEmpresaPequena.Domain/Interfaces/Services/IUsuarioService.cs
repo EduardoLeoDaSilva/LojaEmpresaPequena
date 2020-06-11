@@ -20,5 +20,6 @@ namespace LojaEmpresaPequena.Domain.Interfaces.Services
         Task<IdentityResult> Update(Usuario usuario);
         IQueryable<Usuario> GetAllUsuariosClientes();
         Task<Usuario> GetById(Guid id);
+        Task<Usuario> GetByUsername(string email);
     }
 }

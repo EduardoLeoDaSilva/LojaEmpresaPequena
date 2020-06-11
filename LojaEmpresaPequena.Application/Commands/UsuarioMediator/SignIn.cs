@@ -1,5 +1,6 @@
 ﻿using LojaEmpresaPequena.Domain.Entities.Api;
 using LojaEmpresaPequena.Domain.Interfaces.Services;
+using LojaEmpresaPequena.Domain.Interfaces.Services.Jwt;
 using LojaEmpresaPequena.Domain.Resources;
 using MediatR;
 using System;
@@ -21,9 +22,11 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
         public class Handler : IRequestHandler<SignInContract, Result<string>>
         {
             private readonly IUsuarioService _usuarioService;
-            public Handler(IUsuarioService usuarioService)
+            private readonly IJwtService _jwtService;
+            public Handler(IUsuarioService usuarioService, IJwtService jwtService)
             {
                 _usuarioService = usuarioService;
+                _jwtService = jwtService;
             }
             public async Task<Result<string>> Handle(SignInContract request, CancellationToken cancellationToken)
             {
@@ -37,7 +40,13 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
                 var result = await _usuarioService.SignIn(request.Email, request.Password);
 
                 if (result.Succeeded)
-                    return await Result<string>.Ok(ProgramMessages.Sucesso);
+                {
+
+                    var usuarioFromDb = await _usuarioService.GetByUsername(request.Email);
+                    var jwtToken =  _jwtService.GenerateToken(usuarioFromDb);
+
+                    return await Result<string>.Ok(jwtToken);
+                }
 
                 if (result.IsNotAllowed)
                 {

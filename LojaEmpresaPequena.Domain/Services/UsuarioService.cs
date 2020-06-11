@@ -121,6 +121,13 @@ namespace LojaEmpresaPequena.Domain.Services
 
         }
 
+
+        public async Task<Usuario> GetByUsername(string email)
+        {
+            var usuariosFromDb = await _userManager.FindByNameAsync(email);
+            return usuariosFromDb;
+        }
+
         public async Task<Usuario> GetById(Guid id)
         {
             var usuariosFromDb = await _usuarioRepository.GetById(id);

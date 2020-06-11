@@ -14,7 +14,7 @@ namespace LojaEmpresaPequena.Context.Repositories
         public ProdutoRepository(LojaEmpresaPequenaIdentityContext context) :base (context)
         {
             
-        }
+         }
 
         public async override Task<Produto> GetById(Guid id)
         {

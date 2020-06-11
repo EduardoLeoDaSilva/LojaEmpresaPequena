@@ -29,7 +29,7 @@ namespace LojaEmpresaPequena.Domain.Services.Jwt
                     new Claim(ClaimTypes.Name, usuario.UserName.ToString()),
                     new Claim(ClaimTypes.Role, usuario.Role.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddHours(4),
+                Expires = DateTime.UtcNow.AddMinutes(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

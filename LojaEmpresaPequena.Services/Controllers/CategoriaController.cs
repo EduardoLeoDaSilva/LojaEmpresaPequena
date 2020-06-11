@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 using LojaEmpresaPequena.Application.Commands.CategoriaMediator;
 using LojaEmpresaPequena.Application.Queries.CategoriaMediator;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LojaEmpresaPequena.Services.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriaController : ControllerBase
     {
         private readonly IMediator _media;

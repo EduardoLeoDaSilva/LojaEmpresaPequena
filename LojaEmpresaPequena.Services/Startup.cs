@@ -18,6 +18,9 @@ using MediatR;
 using System.Reflection;
 using LojaEmpresaPequena.Ioc;
 using LojaEmpresaPequena.Services.Middlewares;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LojaEmpresaPequena.Services
 {
@@ -42,11 +45,6 @@ namespace LojaEmpresaPequena.Services
             //Ef e Identity
             services.AddDbContext<LojaEmpresaPequenaIdentityContext>(options => options.UseMySql(Configuration.GetConnectionString("Banco"), b => b.MigrationsAssembly("LojaEmpresaPequena.Context")));
             services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<LojaEmpresaPequenaIdentityContext>();
-
-
-            //services.AddControllers().AddNewtonsoftJson(options =>
-            //options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            //);
 
             DependencyInjector.Inject(services);
 
@@ -77,7 +75,27 @@ namespace LojaEmpresaPequena.Services
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddCors(x => x.AddPolicy("teste", t => { t.AllowAnyOrigin(); t.AllowAnyHeader(); t.AllowAnyHeader(); t.AllowAnyMethod(); }));
+            //JwtToken config
+            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("JwtSecret"));
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            services.AddCors(x => x.AddPolicy("cors", t => { t.AllowAnyOrigin(); t.AllowAnyHeader(); t.AllowAnyHeader(); t.AllowAnyMethod(); }));
 
             services.AddSession();
             services.AddDistributedMemoryCache();
@@ -101,7 +119,7 @@ namespace LojaEmpresaPequena.Services
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-            app.UseCors("teste");
+            app.UseCors("cors");
             app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
@@ -113,6 +131,8 @@ namespace LojaEmpresaPequena.Services
                 app.UseHsts();
             }
 
+            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseSession();
             app.UseHttpsRedirection();
             app.UseMvc();

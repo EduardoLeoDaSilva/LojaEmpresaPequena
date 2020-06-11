@@ -51,5 +51,12 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [HttpPost("signIn")]
+        public async Task<IActionResult> SignIn([FromBody]SignIn.SignInContract contract)
+        {
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
+
     }
 }
