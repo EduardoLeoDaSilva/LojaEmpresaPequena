@@ -11,5 +11,10 @@ namespace LojaEmpresaPequena.Services.Controllers
     [ApiController]
     public class ItemPedidoController : ControllerBase
     {
+        [HttpPut]
+        public async IActionResult Update()
+        {
+
+        }
     }
 }
