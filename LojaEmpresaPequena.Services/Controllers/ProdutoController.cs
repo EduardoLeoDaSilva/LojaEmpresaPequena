@@ -24,7 +24,9 @@ namespace LojaEmpresaPequena.Services.Controllers
             _media = media;
         }
 
- 
+
+        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         public async Task<IActionResult> Save(SaveProduto.SaveProdutoContract contract)
         {
@@ -32,13 +34,14 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduto([FromRoute]GetProduto.GetProdutoContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllProdutos([FromQuery]GetAllProdutos.GetAllProdutosContract contract)
         {
@@ -54,6 +57,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduto([FromRoute]DeleteProduto.DeleteProdutoContract contract)
         {

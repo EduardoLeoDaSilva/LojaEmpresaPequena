@@ -28,12 +28,12 @@ namespace LojaEmpresaPequena.Application.Queries.EnderecoMediator
             public async Task<Result<Endereco>> Handle(GetEnderecoContract request, CancellationToken cancellationToken)
             {
                 if (request.Id == null)
-                    return await Result<Endereco>.Fail(ProgramMessages.IdErro);
+                    return  Result<Endereco>.FailToMiddleware(ProgramMessages.IdErro);
 
                 var enderecoFromDb = await _enderecoService.GetById(request.Id);
 
                 if (enderecoFromDb == null)
-                    return await Result<Endereco>.Fail(ProgramMessages.EnderecoAttempt);
+                    return  Result<Endereco>.FailToMiddleware(ProgramMessages.EnderecoAttempt);
 
                 return await Result<Endereco>.Ok(enderecoFromDb);
 

@@ -29,12 +29,12 @@ namespace LojaEmpresaPequena.Application.Commands.PedidoMediator
             public async Task<Result<string>> Handle(UpdatePedidoContract request, CancellationToken cancellationToken)
             {
                 if (request.Pedido == null)
-                    return await Result<string>.Fail(ProgramMessages.PedidoInvalido);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.PedidoInvalido);
 
                 var pedidoFromDb = _pedidoService.GetCurrentPedido(request.Pedido.Usuario);
 
                 if(pedidoFromDb == null)
-                    return await Result<string>.Fail(ProgramMessages.PedidoInvalido);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.PedidoInvalido);
 
                 pedidoFromDb.UpdateInstance(request.Pedido);
 

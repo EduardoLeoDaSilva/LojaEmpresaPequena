@@ -28,19 +28,19 @@ namespace LojaEmpresaPequena.Application.Commands.CategoriaMediator
             public async Task<Result<string>> Handle(UpdateCategoriaContract request, CancellationToken cancellationToken)
             {
                 if (request.Id == null)
-                    return await Result<string>.Fail(ProgramMessages.IdErro);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.IdErro);
 
 
                 var categoriaFromDb = await _categoriaService.GetById(request.Id);
 
 
                 if(String.IsNullOrEmpty(request.Nome) || string.IsNullOrWhiteSpace(request.Nome))
-                    await Result<string>.FailToMiddleware(ProgramMessages.NomeInvalido);
+                     Result<string>.FailToMiddleware(ProgramMessages.NomeInvalido);
 
                 categoriaFromDb.Nome = request.Nome;
 
                 if(categoriaFromDb == null)
-                    await  Result<string>.FailToMiddleware(ProgramMessages.Falha);
+                      Result<string>.FailToMiddleware(ProgramMessages.Falha);
 
                 await _categoriaService.Update(categoriaFromDb);
 

@@ -2,6 +2,7 @@
 using LojaEmpresaPequena.Domain.Enums;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
 using LojaEmpresaPequena.Domain.Interfaces.Services;
+using LojaEmpresaPequena.Domain.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -29,27 +30,53 @@ namespace LojaEmpresaPequena.Domain.Services
             return _repository.GetCurrentPedido(usuario);
         }
     
-        public async Task<Pedido> CreatePedidoOrAddItemPedido(Usuario usuario, Produto produto)
+        public async Task<Pedido> CreatePedidoOrAddItemPedido(Usuario usuario, List<Guid> produtos)
         {
             var pedido = _repository.GetCurrentPedido(usuario);
-            var produtoFromDb = await _produtoRepository.GetById(produto.Id);
+            //var produtoFromDb = await _produtoRepository.GetById(produto.Id);
+            var listaProdutosDb = new List<Produto>();
+            foreach (var prodId in produtos)
+            {
+                var prod = await _produtoRepository.GetById(prodId);
+                if(prod != null)
+                {
+                    listaProdutosDb.Add(prod);
+                }
+            }
 
             if (pedido != null)
             {
-                pedido.ItemPedidos.Add(new ItemPedido(1, produtoFromDb.Preco, pedido, produtoFromDb));
+                foreach (var produto in listaProdutosDb)
+                {
+                pedido.ItemPedidos.Add(new ItemPedido(1, produto.Preco, pedido, produto));
+                }
+
                 await _repository.Update(pedido);
                 return pedido;
             }
             else
             {
-                var usuarioFromDB = await _userManager.FindByNameAsync(usuario.Cpf);
+                var usuarioFromDB = await _userManager.FindByIdAsync(usuario.Id);
                 pedido = new Pedido(DateTime.Now, null, StatusPedido.Carrinho, StatusEnvio.EsperandoAprovacao, usuarioFromDB,new List<ItemPedido>());
-                pedido.ItemPedidos.Add(new ItemPedido(1, produtoFromDb.Preco, pedido, produtoFromDb));
+                foreach (var produto in listaProdutosDb)
+                {
+                pedido.ItemPedidos.Add(new ItemPedido(1, produto.Preco, pedido, produto));
+                }
+
                 await _repository.Save(pedido);
                 return pedido;
             }
         }
 
+        public async Task PayPedido(Usuario usuario)
+        {
+            var pedido = _repository.GetCurrentPedido(usuario);
+
+            pedido.StatusPedido = StatusPedido.Aprovado;
+            pedido.DetalhesPedido.DataAprovacao = DateTime.Now;
+            pedido.StatusEnvio = StatusEnvio.ASerEnviado;
+            await _repository.Update(pedido);
+        }
 
     }
 }

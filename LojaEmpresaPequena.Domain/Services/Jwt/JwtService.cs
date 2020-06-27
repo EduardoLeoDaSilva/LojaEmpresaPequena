@@ -27,9 +27,9 @@ namespace LojaEmpresaPequena.Domain.Services.Jwt
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, usuario.UserName.ToString()),
-                    new Claim(ClaimTypes.Role, usuario.Role.ToString())
+                    new Claim(ClaimTypes.Role, usuario.Role .ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddHours(4),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

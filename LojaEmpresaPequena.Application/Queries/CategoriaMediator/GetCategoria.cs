@@ -28,12 +28,12 @@ namespace LojaEmpresaPequena.Application.Queries.CategoriaMediator
             public async Task<Result<Categoria>> Handle(GetCategoriaContract request, CancellationToken cancellationToken)
             {
                 if (request.Id == null)
-                    return await Result<Categoria>.Fail(ProgramMessages.IdErro);
+                    return  Result<Categoria>.FailToMiddleware(ProgramMessages.IdErro);
 
                 var categoria =await _categoriaService.GetById(request.Id);
 
                 if (categoria == null)
-                    return await Result<Categoria>.Fail(ProgramMessages.CategoriaAttempt);
+                    return  Result<Categoria>.FailToMiddleware(ProgramMessages.CategoriaAttempt);
 
                 return await Result<Categoria>.Ok(categoria);
 

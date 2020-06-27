@@ -24,7 +24,7 @@ namespace LojaEmpresaPequena.Domain.Entities
 
             VerifyDomainRules.CreateInstance()
                 .VerifyRule(pedido == null, ProgramMessages.ProdutoInvalido)
-                .VerifyRule(tipoPagamento == null, ProgramMessages.TipoPagamentoInvalido)
+                //.VerifyRule(tipoPagamento == null, ProgramMessages.TipoPagamentoInvalido)
                 .ThrowExceptionDomain();
                 
 

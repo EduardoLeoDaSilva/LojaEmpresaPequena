@@ -3,6 +3,7 @@ using LojaEmpresaPequena.Domain.Resources;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace LojaEmpresaPequena.Domain.Entities
 {
@@ -16,6 +17,7 @@ namespace LojaEmpresaPequena.Domain.Entities
         public string Cep { get; set; }
         public string Complemento { get; set; }
 
+        [JsonIgnore]
         public Usuario Usuario { get; set; }
 
         public Endereco()

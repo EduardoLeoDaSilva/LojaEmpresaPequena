@@ -46,7 +46,7 @@ namespace LojaEmpresaPequena.Application.Commands.ProdutoMediator
                 var fotos = JsonConvert.DeserializeObject<List<Foto>>(request.Fotos);
 
                 if (prodFromDb == null)
-                    return await Result<string>.Fail(ProgramMessages.TentarBuscarProdErro);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.TentarBuscarProdErro);
 
                 var listProdCate = new List<ProdutoCategoria>();
                 foreach (var item in categorias)

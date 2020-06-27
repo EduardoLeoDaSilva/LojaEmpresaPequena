@@ -38,12 +38,12 @@ namespace LojaEmpresaPequena.Application.Queries.PedidoMediator
             {
                 _pedidoService = pedidoService;
             }
-            public Task<Result<PedidosResponse>> Handle(GetAllPedidoByUsuarioContract request, CancellationToken cancellationToken)
+            public async Task<Result<PedidosResponse>> Handle(GetAllPedidoByUsuarioContract request, CancellationToken cancellationToken)
             {
                 var listFromDb = _pedidoService.GetAll();
 
                 if (request.Usuario == null)
-                    return Result<PedidosResponse>.Fail(ProgramMessages.UsuarioNulo);
+                    return Result<PedidosResponse>.FailToMiddleware(ProgramMessages.UsuarioNulo);
 
                 //IMplementar pra esse bloco procura por numero do pedido
                 //if (!String.IsNullOrEmpty(request.UsuarioNomeFilter) || !String.IsNullOrWhiteSpace(request.UsuarioNomeFilter))
@@ -56,7 +56,7 @@ namespace LojaEmpresaPequena.Application.Queries.PedidoMediator
 
                 var pagedList = listFromDb.ToPagedList(request.Page, request.PageSize);
 
-                return Result<PedidosResponse>.Ok(new PedidosResponse()
+                return await Result<PedidosResponse>.Ok(new PedidosResponse()
                 {
                     Pedidos = pagedList.ToList(),
                     RowCount = pagedList.PageCount

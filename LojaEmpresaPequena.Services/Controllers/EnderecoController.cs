@@ -31,6 +31,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllEnderecos(GetAllEnderecos.GetAllEnderecosContract contract)
         {
@@ -53,6 +54,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> DeleteEndereco(DeleteEndereco.DeleteEnderecoContract contract)
         {

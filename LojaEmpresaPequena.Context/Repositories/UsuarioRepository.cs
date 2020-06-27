@@ -1,5 +1,6 @@
 ﻿using LojaEmpresaPequena.Domain.Entities;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace LojaEmpresaPequena.Context.Repositories
 {
     public class UsuarioRepository :  IUsuarioRepository
     {
-
+        private LojaEmpresaPequenaIdentityContext _context;
         public UsuarioRepository(LojaEmpresaPequenaIdentityContext context)
         {
-
+            _context = context;
         }
 
         public Task Delete(Guid id)
@@ -21,14 +22,14 @@ namespace LojaEmpresaPequena.Context.Repositories
             throw new NotImplementedException();
         }
 
-        public IQueryable<Usuario> GetAll()
+        public  IQueryable<Usuario> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Set<Usuario>().Include(x => x.Enderecos);
         }
 
-        public Task<Usuario> GetById(Guid id)
+        public async Task<Usuario> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<Usuario>().Where(x => x.Id == id.ToString()).Include(x => x.Enderecos).SingleOrDefaultAsync();
         }
 
         public Task Save(Usuario entidade)

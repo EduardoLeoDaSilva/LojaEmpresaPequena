@@ -40,7 +40,7 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
                 _produtoService = produtoService;
             }
 
-            public Task<Result<ProdutosResponse>> Handle(GetAllProdutosContract request, CancellationToken cancellationToken)
+            public async Task<Result<ProdutosResponse>> Handle(GetAllProdutosContract request, CancellationToken cancellationToken)
             {
                 var listProdFromDb = _produtoService.GetAll();
 
@@ -54,7 +54,7 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
 
                 var pagedList = listProdFromDb.ToPagedList(request.Page, request.PageSize);
 
-                return Result<ProdutosResponse>.Ok(
+                return await Result<ProdutosResponse>.Ok(
                      new ProdutosResponse()
                      {
                          Produtos = pagedList.ToList(),

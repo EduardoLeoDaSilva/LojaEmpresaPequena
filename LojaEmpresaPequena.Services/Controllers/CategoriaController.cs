@@ -31,6 +31,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllCategorias([FromQuery] GetAllCategorias.GetAllCategoriasContract contract)
         {
@@ -38,6 +39,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("lista")]
         public async Task<IActionResult> GetAllCategoriasList([FromQuery] GetAllCategoriasList.GetAllCategoriasListContract contract)
         {
@@ -45,6 +47,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoriaById([FromRoute] GetCategoria.GetCategoriaContract contract)
         {

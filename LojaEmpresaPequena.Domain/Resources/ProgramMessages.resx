@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdicionadoCarrinho" xml:space="preserve">
+    <value>Produto adicionando no carrinho!</value>
+  </data>
   <data name="BairroInvalido" xml:space="preserve">
     <value>Bairro inválido!</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="NumeroInvalido" xml:space="preserve">
     <value>Numero inválido!</value>
+  </data>
+  <data name="PagamentoRealizado" xml:space="preserve">
+    <value>Pagamento realizado com sucesso!</value>
   </data>
   <data name="PedidoInvalido" xml:space="preserve">
     <value>Pedido inválido!</value>

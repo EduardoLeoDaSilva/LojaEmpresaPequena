@@ -30,7 +30,7 @@ namespace LojaEmpresaPequena.Application.Commands.EnderecoMediator
             public async Task<Result<string>> Handle(DeleteEnderecoContract request, CancellationToken cancellationToken)
             {
                 if (request.Id == null)
-                    return await Result<string>.Fail(ProgramMessages.IdErro);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.IdErro);
 
                 await _enderecoService.Delete(request.Id);
 

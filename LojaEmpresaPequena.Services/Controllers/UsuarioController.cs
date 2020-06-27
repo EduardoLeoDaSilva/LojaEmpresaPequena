@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LojaEmpresaPequena.Application.Commands.UsuarioMediator;
 using LojaEmpresaPequena.Application.Queries.UsuarioMediator;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,15 +30,23 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllUsuarios(GetAllUsuarios.GetAllUsuariosContract contract)
+        [HttpPost("cliente")]
+        public async Task<IActionResult> SaveClient([FromBody]CreateUsuarioCliente.CreateUsuarioClienteContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);
         }
 
-        [HttpGet("id")]
-        public async Task<IActionResult> GetUsuarioById(GetUsuario.GetUsuarioContract contract)
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsuarios([FromQuery]GetAllUsuarios.GetAllUsuariosContract contract)
+        {
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUsuarioById([FromRoute]GetUsuario.GetUsuarioContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);

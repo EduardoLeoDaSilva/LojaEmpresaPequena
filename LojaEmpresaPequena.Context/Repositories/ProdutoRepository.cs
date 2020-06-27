@@ -20,5 +20,10 @@ namespace LojaEmpresaPequena.Context.Repositories
         {
             return await _dbSet.Where(x => x.Id == id).Include(x => x.ProdutoCategorias).ThenInclude(x => x.Categoria).Include(x => x.Fotos).SingleOrDefaultAsync();
         }
+
+        public  override IQueryable<Produto> GetAll()
+        {
+            return  _dbSet.Include(x => x.ProdutoCategorias).ThenInclude(x => x.Categoria).Include(x => x.Fotos);
+        }
     }
 }

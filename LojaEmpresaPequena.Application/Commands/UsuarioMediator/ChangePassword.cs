@@ -30,10 +30,10 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
             public async Task<Result<string>> Handle(ChangePasswordContract request, CancellationToken cancellationToken)
             {
                 if (request.Usuario == null)
-                    return await Result<string>.Fail(ProgramMessages.UsuarioNulo);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.UsuarioNulo);
 
                 if (String.IsNullOrEmpty(request.Password) || String.IsNullOrWhiteSpace(request.Password))
-                    return await Result<string>.Fail(ProgramMessages.SenhaInvalida);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.SenhaInvalida);
 
                 var result = await _usuarioService.ChangePassword(request.Usuario, request.Password);
 
@@ -42,10 +42,10 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
 
                 if (result.Errors.Count() > 0)
                 {
-                    return await Result<string>.Fail(result.Errors.Select(x => x.Description).ToArray());
+                    return  Result<string>.FailToMiddleware(result.Errors.Select(x => x.Description).ToArray());
                 }
 
-                return await Result<string>.Fail(ProgramMessages.Falha);
+                return  Result<string>.FailToMiddleware(ProgramMessages.Falha);
 
             }
         }

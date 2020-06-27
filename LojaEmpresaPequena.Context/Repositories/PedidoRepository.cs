@@ -13,13 +13,13 @@ namespace LojaEmpresaPequena.Context.Repositories
     {
         public PedidoRepository(LojaEmpresaPequenaIdentityContext context) :base(context)
         {
-            
+ 
         }
 
 
         public override IQueryable<Pedido> GetAll()
         {
-            var pedidos = _dbSet.Include(x => x.DetalhesPedido).Include(x => x.ItemPedidos).ThenInclude(x => x.Produto).ThenInclude(x => x.ProdutoCategorias);
+            var pedidos = _dbSet.Include(x => x.DetalhesPedido).Include(x => x.ItemPedidos).ThenInclude(x => x.Produto).ThenInclude(x => x.Fotos).ThenInclude(x => x.Produto).ThenInclude(x => x.ProdutoCategorias);
             return pedidos;
         }
 

@@ -42,7 +42,7 @@ namespace LojaEmpresaPequena.Application.Queries.ItemPedidoMediator
             {
                 
                 if (request.Pedido == null)
-                    return await Result<ItemPedidosResponse>.Fail(ProgramMessages.PedidoInvalido);
+                    return  Result<ItemPedidosResponse>.FailToMiddleware(ProgramMessages.PedidoInvalido);
 
                 var itensPedidoFromDb = _itemPedidoService.GetAll().Where(x => x.Pedido.Id == request.Pedido.Id);
                 var pageList = itensPedidoFromDb.ToPagedList(request.Page, request.PageSize);

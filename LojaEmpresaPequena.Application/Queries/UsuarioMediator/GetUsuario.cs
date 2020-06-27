@@ -34,7 +34,7 @@ namespace LojaEmpresaPequena.Application.Queries.UsuarioMediator
                     return await Result<Usuario>.Ok(prodFromDb);
                 }
 
-                return await Result<Usuario>.Fail(ProgramMessages.Falha); ;
+                return  Result<Usuario>.FailToMiddleware(ProgramMessages.Falha); ;
             }
         }
     }

@@ -61,7 +61,7 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
                     return await Result<ProdutoResponse>.Ok(prodResponse);
                 }
 
-                return await Result<ProdutoResponse>.Fail(ProgramMessages.ProdAttempt); ;
+                return  Result<ProdutoResponse>.FailToMiddleware(ProgramMessages.ProdAttempt); ;
             }
         }
     }

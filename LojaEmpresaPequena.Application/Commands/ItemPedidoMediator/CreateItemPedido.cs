@@ -37,13 +37,13 @@ namespace LojaEmpresaPequena.Application.Commands.ItemPedidoMediator
             public  async Task<Result<string>> Handle(CreateItemPedidoContract request, CancellationToken cancellationToken)
             {
                 if (request.Produto == null)
-                    return await Result<string>.Fail(ProgramMessages.ProdutoInvalido);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.ProdutoInvalido);
 
                 if (request.Pedido == null)
-                    return await Result<string>.Fail(ProgramMessages.PedidoInvalido);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.PedidoInvalido);
 
                 if (request.Usuario == null)
-                    return await Result<string>.Fail(ProgramMessages.UsuarioNulo);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.UsuarioNulo);
 
                 var currentPedido = _pedidoService.GetCurrentPedido(request.Usuario);
                 var produtoFromDb = await _produtoService.GetById(request.Produto.Id);

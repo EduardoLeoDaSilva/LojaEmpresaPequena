@@ -3,6 +3,7 @@ using LojaEmpresaPequena.Domain.Entities.Api;
 using LojaEmpresaPequena.Domain.Interfaces.Services;
 using LojaEmpresaPequena.Domain.Resources;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,10 +40,10 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
             public async Task<Result<string>> Handle(CreateUsuarioAdminContract request, CancellationToken cancellationToken)
             {
                 if (String.IsNullOrEmpty(request.Email) || String.IsNullOrWhiteSpace(request.Email))
-                    return await Result<string>.Fail(ProgramMessages.EmailInvalido);
+                    return Result<string>.FailToMiddleware(ProgramMessages.EmailInvalido);
 
                 if (String.IsNullOrEmpty(request.Senha) || String.IsNullOrWhiteSpace(request.Senha))
-                    return await Result<string>.Fail(ProgramMessages.SenhaInvalida);
+                    return Result<string>.FailToMiddleware(ProgramMessages.SenhaInvalida);
 
                 var listaEndereco = new List<Endereco>();
                 listaEndereco.Add(JsonConvert.DeserializeObject<Endereco>(request.Enderecos));
@@ -57,18 +58,25 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
                     Telefone = request.Telefone,
                     CodigoDeArea = request.CodigoDeArea
                 };
-
-                var result = await _usuarioService.CreateAdmin(usuario, request.Senha);
+                IdentityResult result = null;
+                if (request.Role == "Admin")
+                {
+                    result = await _usuarioService.CreateAdmin(usuario, request.Senha);
+                }
+                else if (request.Role == "Cliente")
+                {
+                    result = await _usuarioService.CreateUser(usuario, request.Senha);
+                }
 
                 if (result.Succeeded)
                     return await Result<string>.Ok(ProgramMessages.Sucesso);
 
                 if (result.Errors.Count() > 0)
                 {
-                    return await Result<string>.Fail(result.Errors.Select(x => x.Description).ToArray());
+                    return Result<string>.FailToMiddleware(result.Errors.Select(x => x.Description).ToArray());
                 }
 
-                return await Result<string>.Fail(ProgramMessages.Falha);
+                return Result<string>.FailToMiddleware(ProgramMessages.Falha);
 
             }
         }

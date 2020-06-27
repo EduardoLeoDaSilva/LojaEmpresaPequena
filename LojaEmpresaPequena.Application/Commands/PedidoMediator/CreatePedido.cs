@@ -16,31 +16,48 @@ namespace LojaEmpresaPequena.Application.Commands.PedidoMediator
     {
         public class CreatePedidoContract : IRequest<Result<string>>
         {
-            public Usuario Usuario { get; set; }
-            public Produto Produto { get; set; }
+            public string Email { get; set; }
+            //public Guid IdProduto { get; set; }
+            public List<Guid> IdProdutos { get; set; }
         }
 
         public class Handler : IRequestHandler<CreatePedidoContract, Result<string>>
         {
             private readonly IPedidoService _pedidoService;
-            public Handler(IPedidoService pedidoService)
+            private readonly IProdutoService _produtoService;
+            private readonly IUsuarioService _usuarioService;
+            public Handler(IPedidoService pedidoService, IProdutoService produtoService, IUsuarioService usuarioService)
             {
                 _pedidoService = pedidoService;
+                _produtoService = produtoService;
+                _usuarioService = usuarioService;
             }
 
             public async Task<Result<string>> Handle(CreatePedidoContract request, CancellationToken cancellationToken)
             {
+                if (String.IsNullOrEmpty(request.Email))
+                    return Result<string>.FailToMiddleware(ProgramMessages.EmailInvalido);
 
-                if (request.Usuario == null)
-                    return await Result<string>.Fail(ProgramMessages.UsuarioNulo);
-
-                if (request.Produto == null)
-                    return await Result<string>.Fail(ProgramMessages.ProdAttempt);
-
-                var pedido = await _pedidoService.CreatePedidoOrAddItemPedido(request.Usuario,request.Produto);
+                //if (request.IdProduto == null)
+                //    return Result<string>.FailToMiddleware(ProgramMessages.ProdAttempt);
 
 
-                return await Result<string>.Ok(ProgramMessages.Sucesso);
+                if (request.IdProdutos == null)
+                    return Result<string>.FailToMiddleware(ProgramMessages.ProdAttempt);
+
+                var usuario = await _usuarioService.GetByUsername(request.Email);
+                //var produto = await _produtoService.GetById(request.IdProduto);
+
+                if (usuario == null)
+                    return  Result<string>.FailToMiddleware(ProgramMessages.UsuarioNulo);
+
+                //if (produto == null)
+                //    return  Result<string>.FailToMiddleware(ProgramMessages.ProdAttempt);
+
+                var pedido = await _pedidoService.CreatePedidoOrAddItemPedido(usuario, request.IdProdutos);
+
+
+                return await Result<string>.Ok(ProgramMessages.AdicionadoCarrinho);
 
             }
         }

@@ -28,7 +28,7 @@ namespace LojaEmpresaPequena.Application.Commands.ProdutoMediator
             public async Task<Result<string>> Handle(DeleteProdutoContract request, CancellationToken cancellationToken)
             {
                 if (request.Id == null)
-                    return await Result<string>.Fail(ProgramMessages.IdErro);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.IdErro);
 
                await _produtoService.Delete(request.Id);
 

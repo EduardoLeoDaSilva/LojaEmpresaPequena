@@ -33,7 +33,7 @@ namespace LojaEmpresaPequena.Domain.Entities.Api
             return Task.FromResult(result);
         }
 
-        public static Task FailToMiddleware(params string[] erros)
+        public static Result<Entity> FailToMiddleware(params string[] erros)
         {
             throw new DominioException(erros.ToList());
         }

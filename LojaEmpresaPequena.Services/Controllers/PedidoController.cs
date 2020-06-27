@@ -31,6 +31,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllPedidos(GetAllPedidos.GetAllPedidosContract contract)
         {
@@ -46,8 +47,22 @@ namespace LojaEmpresaPequena.Services.Controllers
         }
 
 
+        [HttpPost("GetCurrentPedido")]
+        public async Task<IActionResult> GetCurrentPedidoId(GetCurrentPedido.GetCurrentPedidoContract contract)
+        {
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
+
+
         [HttpPut]
         public async Task<IActionResult> UpdatePedido([FromBody]UpdatePedido.UpdatePedidoContract contract)
+        {
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
+        [HttpPut("Paypedido")]
+        public async Task<IActionResult> Paypedido([FromBody]PayPedido.PayPedidoContract contract)
         {
             var result = await _media.Send(contract);
             return Ok(result);

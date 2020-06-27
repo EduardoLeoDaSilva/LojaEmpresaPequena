@@ -33,7 +33,7 @@ namespace LojaEmpresaPequena.Domain.Services
             VerifyDomainRules.CreateInstance().VerifyRule(String.IsNullOrEmpty(password) || String.IsNullOrWhiteSpace(password), ProgramMessages.SenhaInvalida).ThrowExceptionDomain();
 
             var role = await _roleManager.FindByNameAsync("Cliente");
-            if(role == null)
+            if (role == null)
             {
                 await _roleManager.CreateAsync(new IdentityRole("Cliente"));
             }
@@ -62,7 +62,7 @@ namespace LojaEmpresaPequena.Domain.Services
 
             if (result.Succeeded)
                 await _userManager.AddToRoleAsync(usuario, "Admin");
-            
+
             return result;
 
         }
@@ -97,10 +97,38 @@ namespace LojaEmpresaPequena.Domain.Services
                         .VerifyRule(usuario == null, ProgramMessages.UsuarioNulo)
                         .ThrowExceptionDomain();
 
+            IdentityRole role = null;
+
+            if (usuario.Role == "Admin")
+            {
+                role = await _roleManager.FindByNameAsync("Admin");
+                if (role == null)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                    role = await _roleManager.FindByNameAsync("Admin");
+
+                }
+            }
+            else if (usuario.Role == "Cliente")
+            {
+                role = await _roleManager.FindByNameAsync("Cliente");
+                if (role == null)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("Cliente"));
+                    role = await _roleManager.FindByNameAsync("Cliente");
+
+                }
+            }
+
+
             var usuarioFromDb = await _userManager.FindByEmailAsync(usuario.Email);
+
+
 
             VerifyDomainRules.CreateInstance()
                        .VerifyRule(usuarioFromDb == null, ProgramMessages.UsuarioNulo);
+
+            usuario.Role = role.Name;
 
             usuarioFromDb.UpdateInstance(usuario);
 
@@ -114,9 +142,9 @@ namespace LojaEmpresaPequena.Domain.Services
             await _signInManager.SignOutAsync();
         }
 
-        public  IQueryable<Usuario> GetAllUsuariosClientes()
+        public IQueryable<Usuario> GetAllUsuariosClientes()
         {
-            var usuariosFromDb =  _usuarioRepository.GetAll();
+            var usuariosFromDb = _usuarioRepository.GetAll();
             return usuariosFromDb;
 
         }
@@ -127,6 +155,7 @@ namespace LojaEmpresaPequena.Domain.Services
             var usuariosFromDb = await _userManager.FindByNameAsync(email);
             return usuariosFromDb;
         }
+
 
         public async Task<Usuario> GetById(Guid id)
         {

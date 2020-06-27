@@ -36,12 +36,12 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
             public async Task<Result<EnderecoResponse>> Handle(GetEnderecosByUsuarioContract request, CancellationToken cancellationToken)
             {
                 if (request.Usuario == null)
-                    return await Result<EnderecoResponse>.Fail(ProgramMessages.UsuarioNulo);
+                    return  Result<EnderecoResponse>.FailToMiddleware(ProgramMessages.UsuarioNulo);
 
                 var enderecosUsuarioFromDb = _enderecoService.GetAll().Where(x => x.Usuario.Id == request.Usuario.Id);
 
                 if(enderecosUsuarioFromDb.Count() < 1)
-                    return await Result<EnderecoResponse>.Fail(ProgramMessages.TentarBuscarEnderecoErro);
+                    return  Result<EnderecoResponse>.FailToMiddleware(ProgramMessages.TentarBuscarEnderecoErro);
 
                 return await Result<EnderecoResponse>.Ok(new EnderecoResponse()
                 {

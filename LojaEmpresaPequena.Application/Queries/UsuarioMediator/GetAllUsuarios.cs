@@ -32,7 +32,6 @@ namespace LojaEmpresaPequena.Application.Queries.UsuarioMediator
             public int RowCount { get; set; }
         }
 
-
         public class Handler : IRequestHandler<GetAllUsuariosContract, Result<UsuarioResponse>>
         {
             private readonly IUsuarioService _usuarioService;
@@ -42,7 +41,7 @@ namespace LojaEmpresaPequena.Application.Queries.UsuarioMediator
                 _usuarioService = usuarioService;
             }
 
-            public Task<Result<UsuarioResponse>> Handle(GetAllUsuariosContract request, CancellationToken cancellationToken)
+            public async Task<Result<UsuarioResponse>> Handle(GetAllUsuariosContract request, CancellationToken cancellationToken)
             {
                 var listProdFromDb = _usuarioService.GetAllUsuariosClientes();
 
@@ -61,13 +60,14 @@ namespace LojaEmpresaPequena.Application.Queries.UsuarioMediator
                     listProdFromDb = listProdFromDb.Where(x => x.Cpf.Contains(request.CpfFilter));
                 }
 
+
                 var pagedList = listProdFromDb.ToPagedList(request.Page, request.PageSize);
 
-                return Result<UsuarioResponse>.Ok(
+                return await Result<UsuarioResponse>.Ok(
                      new UsuarioResponse()
                      {
                          Usuarios = pagedList.ToList(),
-                         RowCount = pagedList.PageCount
+                         RowCount = pagedList.TotalItemCount
                      }
                     );
             }

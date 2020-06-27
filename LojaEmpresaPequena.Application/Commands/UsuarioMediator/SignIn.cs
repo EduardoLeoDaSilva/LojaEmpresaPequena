@@ -32,10 +32,10 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
             {
 
                 if (String.IsNullOrEmpty(request.Email) || String.IsNullOrWhiteSpace(request.Email))
-                    return await Result<string>.Fail(ProgramMessages.EmailInvalido);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.EmailInvalido);
 
                 if (String.IsNullOrEmpty(request.Password) || String.IsNullOrWhiteSpace(request.Password))
-                    return await Result<string>.Fail(ProgramMessages.SenhaInvalida);
+                    return  Result<string>.FailToMiddleware(ProgramMessages.SenhaInvalida);
 
                 var result = await _usuarioService.SignIn(request.Email, request.Password);
 
@@ -48,12 +48,7 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
                     return await Result<string>.Ok(jwtToken);
                 }
 
-                if (result.IsNotAllowed)
-                {
-                    return await Result<string>.Fail(ProgramMessages.EmailSenha);
-                }
-
-                return await Result<string>.Fail(ProgramMessages.Falha);
+                return  Result<string>.FailToMiddleware(ProgramMessages.EmailSenha);
 
             }
         }

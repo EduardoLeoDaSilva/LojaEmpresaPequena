@@ -61,6 +61,15 @@ namespace LojaEmpresaPequena.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Produto adicionando no carrinho!.
+        /// </summary>
+        public static string AdicionadoCarrinho {
+            get {
+                return ResourceManager.GetString("AdicionadoCarrinho", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Bairro inválido!.
         /// </summary>
         public static string BairroInvalido {
@@ -228,6 +237,15 @@ namespace LojaEmpresaPequena.Domain.Resources {
         public static string NumeroInvalido {
             get {
                 return ResourceManager.GetString("NumeroInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento realizado com sucesso!.
+        /// </summary>
+        public static string PagamentoRealizado {
+            get {
+                return ResourceManager.GetString("PagamentoRealizado", resourceCulture);
             }
         }
         

@@ -75,6 +75,11 @@ namespace LojaEmpresaPequena.Services
                 options.User.RequireUniqueEmail = true;
             });
 
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
             //JwtToken config
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("JwtSecret"));
             services.AddAuthentication(x =>
@@ -91,7 +96,9 @@ namespace LojaEmpresaPequena.Services
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+
                 };
             });
 
