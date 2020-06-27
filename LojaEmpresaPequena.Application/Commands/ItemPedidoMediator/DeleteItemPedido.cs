@@ -26,7 +26,7 @@ namespace LojaEmpresaPequena.Application.Commands.ItemPedidoMediator
             }
             public async Task<Result<string>> Handle(DeleteItemPedidoContract request, CancellationToken cancellationToken)
             {
-                if (request.Id != null)
+                if (request.Id == null)
                     return  Result<string>.FailToMiddleware(ProgramMessages.Falha);
 
                 await _itemPedidoService.Delete(request.Id);

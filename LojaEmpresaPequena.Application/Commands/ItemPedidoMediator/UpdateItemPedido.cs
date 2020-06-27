@@ -28,10 +28,12 @@ namespace LojaEmpresaPequena.Application.Commands.ItemPedidoMediator
 
             public async Task<Result<string>> Handle(UpdateItemPedidoContract request, CancellationToken cancellationToken)
             {
-                if (request.Id != null)
+                if (request.Id == null)
                     return Result<string>.FailToMiddleware(ProgramMessages.Falha);
 
                 var itemPedidoFromDb = await _itemPedidoService.GetById(request.Id);
+
+                itemPedidoFromDb.Quantidade = request.Quantidade;
 
                 await _itemPedidoService.Update(itemPedidoFromDb);
 
