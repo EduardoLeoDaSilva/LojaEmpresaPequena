@@ -35,4 +35,8 @@
     <ProjectReference Include="..\LojaEmpresaPequena.Ioc\LojaEmpresaPequena.Ioc.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="arqs\" />
+  </ItemGroup>
+
 </Project>

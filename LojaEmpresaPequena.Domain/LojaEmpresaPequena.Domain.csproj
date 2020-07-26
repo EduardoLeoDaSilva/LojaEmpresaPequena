@@ -46,7 +46,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HttpClients\MercadoPago\" />
     <Folder Include="HttpClients\Cep\" />
   </ItemGroup>
   <PropertyGroup>

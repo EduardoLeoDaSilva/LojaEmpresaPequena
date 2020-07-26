@@ -19,6 +19,9 @@ namespace LojaEmpresaPequena.Application.Commands.PedidoMediator
             public string Email { get; set; }
             //public Guid IdProduto { get; set; }
             public List<Guid> IdProdutos { get; set; }
+
+            ///parametro pra identificar em qual plataforma foi feita a requisção //App//WebSite
+            public string Platform { get; set; }
         }
 
         public class Handler : IRequestHandler<CreatePedidoContract, Result<string>>

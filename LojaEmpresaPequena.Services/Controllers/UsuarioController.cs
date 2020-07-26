@@ -67,5 +67,12 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [HttpGet("signOut")]
+        public async Task<IActionResult> SignOut([FromRoute]SignOut.SignOutContract contract)
+        {
+            var result = await _media.Send(contract);
+            return Ok(result);
+        }
+
     }
 }

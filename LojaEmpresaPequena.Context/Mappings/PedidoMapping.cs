@@ -11,6 +11,7 @@ namespace LojaEmpresaPequena.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<Pedido> builder)
         {
+
             builder.HasKey(x => x.Id);
             builder.HasMany(x => x.ItemPedidos).WithOne(x => x.Pedido);
             builder.HasOne(x => x.Usuario).WithMany(x => x.Pedidos);

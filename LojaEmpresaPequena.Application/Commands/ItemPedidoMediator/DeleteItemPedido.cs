@@ -15,21 +15,26 @@ namespace LojaEmpresaPequena.Application.Commands.ItemPedidoMediator
         public class DeleteItemPedidoContract : IRequest<Result<string>>
         {
             public Guid Id { get; set; }
+            public string Email { get; set; }
         }
 
         public class Handler : IRequestHandler<DeleteItemPedidoContract, Result<string>>
         {
             private readonly IItemPedidoService _itemPedidoService;
-            public Handler(IItemPedidoService itemPedidoService)
+            private readonly IUsuarioService _usuarioService;
+            public Handler(IItemPedidoService itemPedidoService, IUsuarioService usuarioService)
             {
                 _itemPedidoService = itemPedidoService;
+                _usuarioService = usuarioService;
             }
             public async Task<Result<string>> Handle(DeleteItemPedidoContract request, CancellationToken cancellationToken)
             {
                 if (request.Id == null)
                     return  Result<string>.FailToMiddleware(ProgramMessages.Falha);
 
-                await _itemPedidoService.Delete(request.Id);
+                var currentUser = await _usuarioService.GetByUsername(request.Email);
+                await _itemPedidoService.DeleteItemPedidoAndCalculateTotal(request.Id, currentUser);
+
                 return await Result<string>.Ok(ProgramMessages.Sucesso);
 
             }

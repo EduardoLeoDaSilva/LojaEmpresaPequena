@@ -14,18 +14,23 @@ namespace LojaEmpresaPequena.Domain.Entities.Api
         public bool Success { get; set; }
         public  string [] Errors { get; set; }
 
+        public string Msg { get; set; }
+
+        public Result(Entity data, bool success, string[] errors,string msg)
+        {
+            Data = data;
+            Success = success;
+            Errors = errors;
+            Msg = msg;
+        }
+
         public Result(bool success, params string[] errors)
         {
             Success = success;
             Errors = errors;
         }
 
-        public Result(Entity data, bool success, string[] errors)
-        {
-            Data = data;
-            Success = success;
-            Errors = errors;
-        }
+        
 
         public static  Task<Result<Entity>> Fail(params string[] erros)
         {
@@ -41,7 +46,7 @@ namespace LojaEmpresaPequena.Domain.Entities.Api
 
         public static Task<Result<Entity>> Ok(Entity data)
         {
-            var result = new Result<Entity>(data,true, null);
+            var result = new Result<Entity>(data,true, null,null);
             return Task.FromResult(result);
         }
     }

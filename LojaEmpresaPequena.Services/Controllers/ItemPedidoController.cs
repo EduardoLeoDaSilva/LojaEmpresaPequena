@@ -27,8 +27,14 @@ namespace LojaEmpresaPequena.Services.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute]DeleteItemPedido.DeleteItemPedidoContract contract)
+        public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
+            DeleteItemPedido.DeleteItemPedidoContract contract = new DeleteItemPedido.DeleteItemPedidoContract
+            {
+                Id = id,
+                Email = HttpContext.User.Identity.Name
+
+            };
             var result = await _media.Send(contract);
             return Ok(result);
         }

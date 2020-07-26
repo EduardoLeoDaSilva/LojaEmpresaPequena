@@ -14,8 +14,7 @@ namespace LojaEmpresaPequena.Application.Commands.UsuarioMediator
     {
         public class SignOutContract : IRequest<Result<string>>
         {
-            public string Email { get; set; }
-            public string Password { get; set; }
+
         }
 
         public class Handler : IRequestHandler<SignOutContract, Result<string>>

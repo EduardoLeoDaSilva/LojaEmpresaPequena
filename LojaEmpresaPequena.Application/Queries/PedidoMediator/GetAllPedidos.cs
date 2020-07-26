@@ -44,12 +44,12 @@ namespace LojaEmpresaPequena.Application.Queries.PedidoMediator
 
                 var pedidos = _pedidoService.GetAll();
 
-                if (String.IsNullOrEmpty(request.UsuarioNomeFilter) && String.IsNullOrWhiteSpace(request.UsuarioNomeFilter))
+                if (!String.IsNullOrEmpty(request.UsuarioNomeFilter) && !String.IsNullOrWhiteSpace(request.UsuarioNomeFilter))
                 {
                     pedidos = pedidos.Where(x => x.Usuario.Nome == request.UsuarioNomeFilter);
                 }
 
-                if (String.IsNullOrEmpty(request.ProdutoNomeFilter) && String.IsNullOrWhiteSpace(request.ProdutoNomeFilter))
+                if (!String.IsNullOrEmpty(request.ProdutoNomeFilter) && !String.IsNullOrWhiteSpace(request.ProdutoNomeFilter))
                 {
                     pedidos = pedidos.Where(x => x.ItemPedidos.Where(t => t.Produto.Nome == request.ProdutoNomeFilter).Any());
 
@@ -61,6 +61,8 @@ namespace LojaEmpresaPequena.Application.Queries.PedidoMediator
                 //    pedidos = pedidos.Where(x => x.ItemPedidos.Where(t => t.Produto.Nome == request.ProdutoNomeFilter).Any());
 
                 //}
+
+                pedidos = pedidos.OrderByDescending(x => x.DataPedido);
 
                 var pagedList = pedidos.ToPagedList(request.Page, request.PageSize);
 

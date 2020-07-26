@@ -12,9 +12,5 @@ namespace LojaEmpresaPequena.Domain.Integrations.MercadoPagoModels
         public string Last_name { get; set; }
         public Address Address { get; set; }
 
-        public DateTime Registration_date { get; set; }
-        public Phone Phone { get; set; }
-   
-
     }
 }

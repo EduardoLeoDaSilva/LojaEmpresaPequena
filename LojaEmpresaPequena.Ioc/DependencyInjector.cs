@@ -1,4 +1,6 @@
 ﻿using LojaEmpresaPequena.Context.Repositories;
+using LojaEmpresaPequena.Domain.HttpClients.MercadoPagoIntegration;
+using LojaEmpresaPequena.Domain.Interfaces.Integrations;
 using LojaEmpresaPequena.Domain.Interfaces.Repositories;
 using LojaEmpresaPequena.Domain.Interfaces.Services;
 using LojaEmpresaPequena.Domain.Interfaces.Services.Email;
@@ -38,6 +40,7 @@ namespace LojaEmpresaPequena.Ioc
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IMercadoPagoIntegrationService, MercadoPagoIntegrationService>();
         }
     }
 }

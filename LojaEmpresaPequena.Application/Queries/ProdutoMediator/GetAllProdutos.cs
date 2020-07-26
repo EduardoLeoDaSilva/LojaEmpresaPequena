@@ -49,6 +49,7 @@ namespace LojaEmpresaPequena.Application.Queries.ProdutoMediator
                     listProdFromDb = listProdFromDb.Where(x => x.Nome.Contains(request.NomeFilter));
                 }
 
+                listProdFromDb= listProdFromDb.Where(x => x.DeletedAt == null);
                 ///Fazer o preço filter dpois **********
                 ///
 

@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200629220652_PropTotalPedidosEUniqueCodigoPedido.cs" />
+    <Compile Remove="Migrations\20200629220652_PropTotalPedidosEUniqueCodigoPedido.Designer.cs" />
+    <Compile Remove="Migrations\20200629231811_PropTotalECodigoPedidoAutoIncrement.cs" />
+    <Compile Remove="Migrations\20200629231811_PropTotalECodigoPedidoAutoIncrement.Designer.cs" />
+    <Compile Remove="Migrations\20200629235558_IdCodigoPedidoToString.cs" />
+    <Compile Remove="Migrations\20200629235558_IdCodigoPedidoToString.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.4" />

@@ -18,6 +18,8 @@ namespace LojaEmpresaPequena.Domain.Entities
 
         public List<Foto> Fotos { get; set; }
 
+        public DateTime? DeletedAt { get; set; }
+
         public Produto()
         {
 

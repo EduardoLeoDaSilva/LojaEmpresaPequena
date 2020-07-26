@@ -3,14 +3,16 @@ using System;
 using LojaEmpresaPequena.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LojaEmpresaPequena.Context.Migrations
 {
     [DbContext(typeof(LojaEmpresaPequenaIdentityContext))]
-    partial class LojaEmpresaPequenaIdentityModelSnapshot : ModelSnapshot
+    [Migration("20200721014708_DeletedAtPropProduto")]
+    partial class DeletedAtPropProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,7 +178,7 @@ namespace LojaEmpresaPequena.Context.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<DateTime?>("DeletedAt")
+                    b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Marca")

@@ -1,4 +1,5 @@
-﻿using LojaEmpresaPequena.Domain.Utils;
+﻿using LojaEmpresaPequena.Domain.Interfaces.Integrations;
+using LojaEmpresaPequena.Domain.Utils;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -10,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
 {
-    public class DroboxIntegration
+    public class DroboxIntegrationService : IDroboxIntegrationService
     {
 
         private readonly ImageHandler _imageHandler;
 
-        public DroboxIntegration()
+        public DroboxIntegrationService()
         {
             _imageHandler = new ImageHandler();
         }
@@ -117,7 +118,8 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
             }
             var responseJson = await message.Content.ReadAsStringAsync();
             var model = JsonConvert.DeserializeObject<DropBoxResponseSharedAndTemporaryLink>(responseJson);
-            if(model == null) { 
+            if (model == null)
+            {
             }
             return model;
         }
@@ -167,7 +169,7 @@ namespace LojaEmpresaPequena.Domain.HttpClients.DropBox
             return await message.Content.ReadAsStringAsync();
         }
 
-      
+
     }
 
 

@@ -3,14 +3,16 @@ using System;
 using LojaEmpresaPequena.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LojaEmpresaPequena.Context.Migrations
 {
     [DbContext(typeof(LojaEmpresaPequenaIdentityContext))]
-    partial class LojaEmpresaPequenaIdentityModelSnapshot : ModelSnapshot
+    [Migration("20200718152430_propsIntegracoMercadoPago1")]
+    partial class propsIntegracoMercadoPago1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,9 +150,6 @@ namespace LojaEmpresaPequena.Context.Migrations
                     b.Property<string>("StatementDescriptor")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("StatusDetailed")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int?>("StatusEnvio")
                         .HasColumnType("int");
 
@@ -175,9 +174,6 @@ namespace LojaEmpresaPequena.Context.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Marca")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

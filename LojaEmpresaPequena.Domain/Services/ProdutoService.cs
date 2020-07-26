@@ -27,19 +27,19 @@ namespace LojaEmpresaPequena.Domain.Services
 
         public async Task<DropbBoxResponseSave> SendImageToDropBox(IFormFile file, string pasta)
         {
-            var sender = new DroboxIntegration(); 
+            var sender = new DroboxIntegrationService(); 
             return await sender.SendImage(file, pasta);
         }
 
         public async Task<DropBoxResponseSharedAndTemporaryLink> GetTemporaryLink(string path)
         {
-            var sender = new DroboxIntegration();
+            var sender = new DroboxIntegrationService();
             return await sender.GetTemporaryLink(path);
         }
 
         public async Task<DropBoxResponseSharedAndTemporaryLink> GetSharedLink(string path)
         {
-            var sender = new DroboxIntegration();
+            var sender = new DroboxIntegrationService();
             return await sender.GetSharedLink(path);
         }
 

@@ -9,6 +9,7 @@ namespace LojaEmpresaPequena.Domain.Enums
         Carrinho = 0,
         Aprovado = 1,
         Cancelado =2,
-        EmProcessamento = 3
+        EmProcessamento = 3,
+        Rejeitado = 4
     }
 }
