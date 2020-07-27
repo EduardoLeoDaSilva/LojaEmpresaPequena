@@ -32,8 +32,8 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'pensaoCasaDoSaborConnection'
-    repository: 'pensaoCasaDoSaborBack'
+    containerRegistry: 'casaDoSaborConnection'
+    repository: 'dudkiller/casa-do-sabor-back'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: |
