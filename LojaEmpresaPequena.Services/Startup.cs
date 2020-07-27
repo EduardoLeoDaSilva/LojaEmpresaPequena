@@ -48,8 +48,7 @@ namespace LojaEmpresaPequena.Services
 
             DependencyInjector.Inject(services);
 
-            var assemblyMediatr = Assembly.GetAssembly(typeof(LojaEmpresaPequena.Application.ProdutoMediator.Commands.SaveProduto));
-            services.AddMediatR(assemblyMediatr);
+            
             services.Configure<IdentityOptions>(options =>
             {
 
@@ -118,7 +117,8 @@ namespace LojaEmpresaPequena.Services
             //    options.SlidingExpiration = true;
             //});
 
-
+            var assemblyMediatr = Assembly.GetAssembly(typeof(LojaEmpresaPequena.Application.ProdutoMediator.Commands.SaveProduto));
+            services.AddMediatR(assemblyMediatr);
 
         }
 
