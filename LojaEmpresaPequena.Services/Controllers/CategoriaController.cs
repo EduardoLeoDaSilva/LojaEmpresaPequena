@@ -70,6 +70,7 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("teste")]
         public  IActionResult TesteCiCd()
         {
