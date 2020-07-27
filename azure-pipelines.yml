@@ -30,11 +30,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-
 - task: Docker@2
   inputs:
     containerRegistry: 'pensaoCasaDoSaborConnection'
-    repository: 'casaDoSabor'
+    repository: 'pensaoCasaDoSaborBack'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: |
