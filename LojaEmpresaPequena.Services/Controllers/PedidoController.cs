@@ -39,7 +39,7 @@ namespace LojaEmpresaPequena.Services.Controllers
         [HttpGet("jsFile")]
         public IActionResult GetJavaScript()
         {
-            return PhysicalFile(Path.Combine(Environment.CurrentDirectory, @"arqs/mercadopago.js") , "application/javascript");
+            return PhysicalFile(Path.Combine(Assembly.GetEntryAssembly().Location, @"arqs/mercadopago.js") , "application/javascript");
         }
 
         [Authorize(Roles = "Admin")]
