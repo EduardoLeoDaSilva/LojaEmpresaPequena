@@ -70,6 +70,12 @@ namespace LojaEmpresaPequena.Services.Controllers
             return Ok(result);
         }
 
+        [HttpGet("teste")]
+        public  IActionResult TesteCiCd()
+        {
+            var result = "Isso é um teste CI/CD";
+            return Ok(result);
+        }
 
     }
 }
